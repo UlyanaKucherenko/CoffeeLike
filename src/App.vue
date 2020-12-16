@@ -8,6 +8,7 @@
 <script>
 import MainLayout from './components/layout/MainLayout.vue';
 
+
 export default {
   components: {
     MainLayout,
@@ -17,9 +18,10 @@ export default {
 </script>
 
 <style lang="scss">
+
 .app {
   min-height: 100vh;
-  display: flex;
+  //display: flex;
 }
 
 </style>
