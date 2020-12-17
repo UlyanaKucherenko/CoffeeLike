@@ -8,16 +8,45 @@
             </div>
             <div class="coffee__content">
                 <h2 class="coffee__title">Choose Your Coffee</h2>
-                <div>
-                    <a-card hoverable style="width: 240px">
+                <div class="coffee__products">
+                    <a-card class="coffee__product" hoverable style="width: 240px">
                         <img
                         slot="cover"
                         alt="example"
-                        src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                        src="../img/product/1.png"
                         />
-                        <a-card-meta title="Europe Street beat">
+                        <a-card-meta title="Affogato">
                         <template slot="description">
-                            www.instagram.com
+                            This is a term that literally means 'drowned'. It is the description of a shot of separately served espresso that is later poured over a the top of a scoop of vanilla ice cream or gelato. This beverage is usually served in a short drink glass and is a Italian desert favourite.
+                             Popular Affogatos include Vanilla Affogato, Mocha Affogato, and Peppermint Affogato.
+
+                        </template>
+                        </a-card-meta>
+                    </a-card>
+
+                     <a-card class="coffee__product" hoverable style="width: 240px">
+                        <img
+                        slot="cover"
+                        alt="example"
+                        src="../img/product/2.png"
+                        />
+                        <a-card-meta title="Babycino">
+                        <template slot="description">
+                            A cappuccino styled drink served in an up-market café typically for children. It consists of warm milk in a small cup and topped with milk froth and chocolate powder. No espresso coffee essence is added.
+                        </template>
+                        </a-card-meta>
+                    </a-card>
+
+                     <a-card class="coffee__product" hoverable style="width: 240px">
+                        <img
+                        slot="cover"
+                        alt="example"
+                        src="../img/product/3.png"
+                        />
+                        <a-card-meta title="Americano">
+                        <template slot="description">
+                            Also known as 'Lungo' or 'Long Black' and made by diluting 1-2 shots of espresso with hot water in order to approximate the texture, flavor and body of an American-style drip coffee. Said to have been originally devised as a sort of insult to Americans who wanted their Italian espresso diluted.
+
                         </template>
                         </a-card-meta>
                     </a-card>
@@ -29,34 +58,28 @@
 
 <script>
 
+
+
 export default {
     name: 'Coffee',
-    
 }
+
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .coffee {
         &__container {
-            padding-left: 15px;
-            padding-top:15px ;
+            padding-top:70px ;
         }
 
         &__logo {
-            margin-bottom: 20px;
+            margin-bottom: 5px;
         }
 
         &__logo-link {
-            width:100px;
-            height: 37px;
-            display: block;
+            display: inline-block;
             position: relative;
-            img{
-                position: absolute;
-                width: 100%;
-                height: 100%;
-               
-            }
+          
         }
 
         &__content {
@@ -74,7 +97,19 @@ export default {
             line-height: 34px;
             color: #415167;
             text-transform: uppercase;
+            margin-bottom: 65px;
 
+        }
+
+        &__products {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            //margin-right: 10px;
+        }
+
+        &__product {
+             margin-right: 10px;
         }
   }
 </style>

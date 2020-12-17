@@ -36,9 +36,9 @@ export default {
 
     &__decor{
         width: 100%;
-        max-width: 236px;
+        max-width: 230px;
         flex: 1;
-        padding: 70px 10px 0px 10px ;
+        padding: 70px 10px 0px 0px ;
 		
 		display: flex;
 		flex-direction: column;
