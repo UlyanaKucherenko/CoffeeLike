@@ -68,7 +68,6 @@ export default {
 			background-color:#C7A17A;
 			color:white;
 			padding: 0 10px;
-;
 		}
 	}
 
@@ -83,15 +82,13 @@ export default {
 		height: 100%;
 		width: 100%;
 
-       img {
-        position: absolute;
-	   	width: 100%;
-        height: 100%;
-        object-position: center;
-        object-fit: cover;
-		
-       }
-    
+        img {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			object-position: center;
+			object-fit: cover;
+        }
 	} 
   }
 </style>
