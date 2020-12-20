@@ -84,10 +84,11 @@ export default {
         flex: 1;
         position: relative;
 		height: 100%;
+		width: 100%;
 
        img {
         position: absolute;
-        width: 100%;
+	   	width: 100%;
         height: 100%;
         object-position: center;
         object-fit: cover;

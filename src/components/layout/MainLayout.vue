@@ -5,7 +5,6 @@
                     <slot />
                 </div>
                 <div class="main-layout__right-nav">
-                     <user-btn />
                     <side-bar />
                 </div>
         </div>
@@ -14,12 +13,10 @@
 
 <script>
 import SideBar from '../rightNavigation/SideBar';
-import UserBtn from '../userButtons/UserBtn.vue';
 export default {
     name: 'MainLayout',
     components: {
-        SideBar,
-        UserBtn
+        SideBar
     }
 }
 </script>
@@ -41,6 +38,7 @@ export default {
 
       &__content {
         flex: 1;
+        width: 100%;
             display: flex;
             & > *{
                 flex:1;
@@ -48,12 +46,14 @@ export default {
       }
 
       &__right-nav{
-        width: 100%;
+        width: 30%;
             max-width: 320px;
             background-color: #3b3c3d;
             flex: 1;
-            //border-left: 1px solid black;
-            padding: 70px 30px 0 30px;
+            padding: 30px 30px 0 30px;
+            display: flex;
+            justify-content: center;
+            
       }
     }
 </style>
