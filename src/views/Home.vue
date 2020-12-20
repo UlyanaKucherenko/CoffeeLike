@@ -39,7 +39,6 @@ export default {
         max-width: 230px;
         flex: 1;
         padding: 70px 10px 0px 0px ;
-		
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -49,7 +48,6 @@ export default {
 
 	&__logo-link {
 		display: inline-block;
-
 	}
 
 	&__title {
@@ -57,7 +55,6 @@ export default {
 		display: inline-block;
 		margin-bottom: 0;
 		position: absolute;
-		//left: 71px;
 		bottom:80px;
 		font-family: Montserrat;
 		font-style: normal;

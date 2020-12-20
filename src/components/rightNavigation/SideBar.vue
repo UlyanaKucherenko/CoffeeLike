@@ -19,7 +19,7 @@
         <ul  class="side-bar__list">
             <li class="side-bar__item" v-for="route in routes" :key="route.name">
                 <router-link :to="route.path" exact active-class="_active" class="side-bar__item-link">
-                     {{route.name}}
+                    {{route.name}}
                 </router-link>
             </li>
         </ul>
