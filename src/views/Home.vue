@@ -12,7 +12,9 @@
 	</div>
 		<div class="home__slider-wrap">
 			<div class="home__slide">
-				<img src="../img/home-slid.png" alt="">	
+			<img src="../img/home-slid.png" alt="">
+				
+				
 			</div>
 			
 		</div>
@@ -24,13 +26,19 @@
 
 export default {
   name: 'Home',
-  components: {
-   
-  }
+   methods: {
+         onChange(a, b, c) {
+            console.log(a, b, c);
+			}
+   }
+
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
+
+	
   .home {
 	display: flex;
 
@@ -72,7 +80,7 @@ export default {
 	}
 
     &__slider-wrap {
-        flex: 1;
+		flex: 1;
         //padding: 0px 0 20px 0;
 		position: relative;
     }

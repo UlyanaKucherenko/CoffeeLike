@@ -8,23 +8,31 @@
             </div>
             <div class="coffee__content">
                 <h2 class="coffee__title">Choose Your Coffee</h2>
+              
+                <a-card style="max-width: 200px">
+                    <img slot="cover" alt="" :src="coctail.strDrinkThumb" />
+                    <a-card-meta :title="coctail.strDrink">
+                        <template slot="description">
+                        {{ coctail.strCategory }}
+                        </template>
+                    </a-card-meta>
+                </a-card>
                 
                 <div class="coffee__products">
                     <div class="coffee__product">
-                         <a-card  hoverable>
-                        <img
-                        slot="cover"
-                        alt="example"
-                        src="../img/product/1.png"
-                        />
-                        <a-card-meta title="Affogato">
-                        <template slot="description">
-                            This is a term that literally means 'drowned'. 
-                        </template>
-                        </a-card-meta>
-                        <the-button icon="heart" type="secondary" @click="handleClick"></the-button>
-                    </a-card>
+                         <div class="coffee__product-content">
+                             <div>
+                                 <img alt="example" src="../img/product/1.png"/>
+                             </div>
+                            
+                            <h3 title="Affogato"></h3>
+                            <p slot="description">
+                                This is a term that literally means 'drowned'. 
+                            </p>
+                            <the-button icon="heart" type="secondary" @click="handleClick"></the-button>
+                        </div>
                     </div>
+
                     <div class="coffee__product">
                          <a-card  hoverable>
                             <img
@@ -37,7 +45,6 @@
                                 A cappuccino styled drink served in an up-market café typically for children. 
                             </template>
                             </a-card-meta>
-                              <the-button icon="home" type="danger" @click="handleClick">test btn</the-button>
                         </a-card>
                     </div>
                     <div class="coffee__product">
@@ -78,20 +85,44 @@
 </template>
 
 <script>
+import {coctailsUrls} from '../http/urls.js';
 
 export default {
     name: 'Coffee',
-    
-     methods: {
-        handleClick() {
-            console.log('BTN clicked');
+    data() {
+        return {
+            coctail: [],
         }
     },
+     methods: {
+         onChange(a, b, c) {
+            console.log(a, b, c);
+            },
+        handleClick() {
+            console.log('BTN clicked');
+        },
+         async getRandomCoctail() {
+            try {
+                const res = await fetch(coctailsUrls.random);
+                const parsedRes = await res.json();
+                return parsedRes;
+            } catch (error) {
+                console.error(error);
+            }
+          },
+    },
+     async created() {
+            const data = await this.getRandomCoctail();
+            console.log(data)
+            this.coctail = data.drinks[0];
+        }
 }
+
 
 </script>
 
 <style lang="scss" scoped>
+
     .coffee {
         &__container {
             padding-top:30px ;
@@ -147,6 +178,10 @@ export default {
              & > div {
                  height: 100%;
              }
+        }
+
+        &__product-content {
+            border: 1px solid rgb(190, 189, 189);
         }
   }
 </style>
