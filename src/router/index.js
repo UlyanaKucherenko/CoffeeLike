@@ -1,24 +1,37 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import {routesNames, routesPath} from './routes'
-const Coffee = () => import(/* webpackChunkName: "coffee" */ '../views/Coffee.vue')
+//import {routesIcon,routesNames, routesPath} from './routes'
+//const Coffee = () => import(/* webpackChunkName: "coffee" */ '../views/Coffee.vue')
 
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: routesPath.home,
-    name: routesNames.home,
+    path: '/',
+    name: 'Home',
     component: Home
   },
   {
-    path: routesPath.coffe,
-    name: routesNames.coffe,
-    component: Coffee
+    path: '/coffee',
+    name: 'Coffee',
+    component: () => import(/* webpackChunkName: "coffee" */ '../views/theCoffee/Coffee.vue'),
+    children: [
+      {
+        path:'all-drinks',
+        name:'AllDrinks',
+        component: () => import(/* webpackChunkName: "coffee" */ '../views/theCoffee/AllDrinks.vue'),
+      },
+      {
+        path:'/coffee',
+        name:'SliderDrinks',
+        component: () => import(/* webpackChunkName: "coffee" */ '../views/theCoffee/SliderDrinks.vue'),
+      }
+    ]
   }
 ]
+
 
 const router = new VueRouter({
   mode: 'history',

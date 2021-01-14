@@ -24,6 +24,7 @@ export default {
 <style lang="scss" >
     .main-layout {
         position: relative;
+        height: 100vh;
        
          &__container {
          display: flex;
@@ -31,18 +32,20 @@ export default {
         align-items: stretch;
         flex:1;
         min-height: 100vh;
-
-        padding: 0px 0px 0 30px;
+        
+        //padding: 0px 0px 0 30px;
       }
 
 
       &__content {
         flex: 1;
-        width: 100%;
-            display: flex;
-            & > *{
+        width: 70%;
+        display: flex;
+        justify-content: center;
+        //padding: 20px;
+          /*  & > *{
                 flex:1;
-            }
+            }*/
       }
 
       &__right-nav{

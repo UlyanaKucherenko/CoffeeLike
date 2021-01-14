@@ -1,6 +1,5 @@
-
-import './styles/style.scss';
 import 'ant-design-vue/dist/antd.css';
+import './styles/style.scss';
 
 
 
@@ -10,12 +9,13 @@ import Antd from 'ant-design-vue';
 import router from './router'
 import store from './store'
 import TheButton from './components/common/TheButton';
-
+import XIcon from './components/common/XIcon';
 
 
 Vue.config.productionTip = false
 
 Vue.component("TheButton", TheButton);
+Vue.component("XIcon", XIcon);
 
 Vue.use(Antd);
 

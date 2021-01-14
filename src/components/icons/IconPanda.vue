@@ -10,3 +10,8 @@
       <path d="M693.678 495.484m-33.032 0a33.032 33.032 0 1 0 66.064 0 33.032 33.032 0 1 0-66.064 0Z" fill="#464655" p-id="1150" />
     </svg>
 </template>
+<script>
+export default {
+  name:"IconPanda",
+}
+</script>

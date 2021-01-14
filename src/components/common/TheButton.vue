@@ -1,9 +1,9 @@
 <template>
     <button class="the-button" :class="[type]" @click="$emit('click')">
-        <a-icon v-if="icon" :type="icon" class="the-button__icon" :spin="spin"/>
         <span class="the-button__text">
             <slot />
         </span>
+         <a-icon v-if="icon" :type="icon" class="the-button__icon" :spin="spin"/>
     </button>
 </template>
 
