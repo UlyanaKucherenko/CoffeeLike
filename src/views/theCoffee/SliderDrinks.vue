@@ -7,7 +7,7 @@
             </div>
          <carousel
             :dots="false"
-            :items="3"
+            :responsive="{0:{items:1},1024:{items:2},1366:{items:3}}"
             :margin="20"
             :loop="false"
             :nav="false" class="slider-drinks__curousel">

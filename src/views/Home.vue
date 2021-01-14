@@ -63,11 +63,12 @@ export default {
 	flex:1;
 	height: 100vh;
 	text-align: center;
+	width: 70%;
     &__decor{
         width: 30%;
-        max-width: 230px;
+        max-width: 400px;
         flex: 1;
-        padding: 70px 10px 0px 10px ;
+        padding: 70px 0px 0px 60px ;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -77,7 +78,16 @@ export default {
 
 	&__logo-link {
 		display: inline-block;
+		width: 200px;
+		img{
+			width: 100%;
+		}
+
+		@include media($screen: 1440px){
+            width: 130px;
+        }
 	}
+
 
 	&__title {
 		text-align: left;
@@ -89,7 +99,7 @@ export default {
 		font-style: normal;
 		font-weight: 900;
 		font-size: $title-size;
-		line-height: 70px;
+		
 		color: #415167;
 		z-index: 2;
 
@@ -98,6 +108,9 @@ export default {
 			color:white;
 			padding: 0 10px;
 		}
+		@include media($screen: 1440px){
+            font-size: 54px;
+        }
 	}
 
     &__slider-wrap {
@@ -123,12 +136,10 @@ export default {
 		line-height: 160px;
 		background: #646566;
 		overflow: hidden;
-		max-width: 816px;
-		width: 100%;
+		width:calc(72vw);
 		}
 	& .ant-carousel .slick-slide {
 		height: 100%;
-		
 		}
 	& .ant-carousel .slick-slide img {
 		width: 100%;
@@ -141,4 +152,5 @@ export default {
 	
 		
   }
+
 </style>

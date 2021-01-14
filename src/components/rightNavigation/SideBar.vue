@@ -70,8 +70,16 @@ export default {
 
     .side-bar {
         position: fixed;
-        width: 100%;
-        max-width: 200px;
+        width: 30%;
+        max-width: 400px;
+        padding: 30px 30px 0 30px;
+        @include media($screen: 1660px){
+        max-width: 320px;
+        }
+        @include media($screen: $screen-desktop){
+            max-width: 200px;
+            padding: 30px 15px 0 15px;
+        }
 
          &__user-btn {
 
@@ -81,6 +89,12 @@ export default {
             color:white;
             min-height: 40px;
             margin-bottom: 40px;
+
+            //$screen-tablet-large
+            @include media($screen: $screen-tablet-large){
+                @include flex($justify-content: space-between, $align-items: center, $direction: column, $wrap: wrap);
+
+            }
         }
 
         &__list {
@@ -122,9 +136,16 @@ export default {
             &._active {
                 background-color: darken( #C7A17A, 20%);
             }
+            @include media($screen: $screen-tablet-large){
+                 @include flex(center,center);
+                 padding: 0 15px;
+            }
         }
         &__item-text {
             margin-left: 20px;
+            @include media($screen: $screen-tablet-large){
+                display: none;
+            }
         }
     }
 </style>

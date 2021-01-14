@@ -50,13 +50,19 @@ export default {
 
       &__right-nav{
         width: 30%;
-            max-width: 320px;
-            background-color: #3b3c3d;
-            flex: 1;
-            padding: 30px 30px 0 30px;
-            display: flex;
-            justify-content: center;
-            
+        max-width: 400px;
+        background-color: #3b3c3d;
+        flex: 1;
+        padding: 30px 30px 0 30px;
+        display: flex;
+        justify-content: center;
+        @include media($screen: 1660px){
+        max-width: 320px;
+        }
+        @include media($screen: $screen-desktop){
+        max-width: 200px;
+        padding: 30px 15px 0 15px;
+        }
       }
     }
 </style>
