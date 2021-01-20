@@ -1,4 +1,8 @@
-# coffee-drinks
+# CoffeeLike
+
+## demo: https://coffeelike.netlify.app/
+
+## Description project:
 
 ## Project setup
 ```

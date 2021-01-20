@@ -1,13 +1,13 @@
 export const routesNames = {
     home: 'Home',
-    coffe: 'Coffee'
-}
-export const routesIcon = {
-    home: 'home',
-    coffe: 'coffee'
+    coffe: 'Coffee',
+    allDrinks:'AllDrinks',
+    sliderDrinks:'SliderDrinks'
 }
 
 export const routesPath = {
     home: '/',
-    coffe: '/coffee'
+    coffe: '/coffee',
+    allDrinks:'allDrinks',
+    sliderDrinks:'/coffee'
 }

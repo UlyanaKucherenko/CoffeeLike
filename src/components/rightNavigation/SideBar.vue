@@ -2,7 +2,7 @@
     <div class="side-bar">
         
         <div class="side-bar__user-btn">
-            
+            <!--
 			<div>
 				<div id="components-badge-demo-title">
                     <a-badge :count="5" title="Custom hover text">
@@ -12,13 +12,30 @@
                     </a-badge>
                 </div>
 			</div>
+            -->
 			<div>
-				<a-avatar style="backgroundColor:#87d068" icon="user"  />
+                <a-dropdown :trigger="['click']">
+                    <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+                        <a-avatar style="backgroundColor:#87d068" icon="user"  />
+                    </a>
+                    <a-menu slot="overlay">
+                    <a-menu-item key="0">
+                        <a href="#">MyProfil</a>
+                    </a-menu-item>
+                    <a-menu-divider />
+                    <a-menu-item key="1">
+                        Output
+                    </a-menu-item>
+                    </a-menu>
+                </a-dropdown>
+                <span class="side-bar__user-name">Ulya</span>
 			</div>
-           
-            <div>
-                <x-icon icon=stars />
+            <div  @click="handleClick">
+                <a-badge :count="cart.length" :offset="[5,0]">
+                    <a-icon type="star" :style="{ fontSize: '25px' }"/>
+                </a-badge>
             </div>
+           
 		</div>
 
         <ul  class="side-bar__list">
@@ -27,14 +44,39 @@
                     <a-icon :type="route.icon" /> <span class="side-bar__item-text">{{route.name}}</span>
                 </router-link>
             </li>
+            <li class="side-bar__item">
+                <router-link to="" exact active-class="_active" class="side-bar__item-link">
+                    <a-badge :count="cart.length" :offset="[5,0]">
+                        <a-icon type="shopping-cart" :style="{ fontSize: '20px' }"/>
+                    </a-badge>
+                    
+                   <span class="side-bar__item-text"> shopping cart</span>
+                </router-link>
+            </li>
+            <li class="side-bar__item">
+                <router-link to="" exact active-class="_active" class="side-bar__item-link">
+                    <a-icon type="home" />
+                    <span class="side-bar__item-text">Contacts</span>
+                </router-link>
+            </li>
         </ul>
 
+        
+        <a-modal v-model="visible" title="Basic Modal" @ok="handleOk">
+        <ul>
+            <li v-for="item in cart" :key="item.name">
+                 <a-avatar shape="square" size="35" icon="user" />
+                {{name}} 
+            </li>
+        </ul>
+        </a-modal>
        
     </div>
     
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
     name: 'SideBar',
     data() {
@@ -50,12 +92,27 @@ export default {
                      name:'Coffee',
                      icon:'coffee'
                  },
+                 
              ],
+              visible: false,
         }
     },
-    mounted() {
-        
-    }
+    methods:{
+        handleClick() {
+            this.visible = true;
+        },
+        handleOk(e) {
+            console.log(e);
+            this.visible = false;
+        },
+    },
+     computed: {
+        ...mapState("shopCart",["cart"]),
+    },
+     mounted() {  
+        console.log(this.cart);
+
+     },
    
 }
 </script>
@@ -96,6 +153,9 @@ export default {
 
             }
         }
+        &__user-name {
+            margin-left: 5px;
+        }
 
         &__list {
 
@@ -125,7 +185,7 @@ export default {
             transition: all 0.3s ease-out;
                 
              &:hover {
-            background-color: darken( #C7A17A, 20%);
+            background-color: darken( #C7A17A, 10%);
             color: #F9F5E8;
 ;
             }

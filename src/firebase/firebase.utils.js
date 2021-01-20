@@ -2,13 +2,13 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 const config = {
-    apiKey: "AIzaSyD0AHXbTQI25gTj20oyPHuJoX8t-4AxUK0",
-    authDomain: "coffee-drinks.firebaseapp.com",
-    projectId: "coffee-drinks",
-    storageBucket: "coffee-drinks.appspot.com",
-    messagingSenderId: "341085434266",
-    appId: "1:341085434266:web:d85f56150efb84424b8a23",
-    measurementId: "G-XX7SN7169M"
+    apiKey: "AIzaSyD88dFhewledbYYC5iXqEfnFHFJ2BAV8-o",
+    authDomain: "drinks-coffee.firebaseapp.com",
+    projectId: "drinks-coffee",
+    storageBucket: "drinks-coffee.appspot.com",
+    messagingSenderId: "53384248519",
+    appId: "1:53384248519:web:e7efad15a1054a0b2dd2e2",
+    measurementId: "G-42B1W9ZEQF"
 };
 firebase.initializeApp(config);
 export const auth = firebase.auth();

@@ -3,7 +3,7 @@
     <div class="home__decor">
 		<div  class="home__logo">
 			<router-link to="/" class="home__logo-link">
-				<img src="../assets/img/revo_logo.png" alt="">	
+				CoffeeLike
 			</router-link>
 		</div>
 		<h1 class="home__title">
@@ -15,15 +15,15 @@
 			
 			<a-carousel 
 			:dot-position="dotPosition"
-			autoplay="true"
-			speed="3000"
-			fade="true"
+			:autoplay="false"
+			:speed="3000"
+			:fade="true"
 			>
 				<div class="home__slider-slide">
-					<img src="../assets/img/home-slid.png" />
+					<img class="home__slider-image" src="../assets/img/home-slid.png" />
 				</div>
 				<div class="home__slider-slide">
-					<img src="../assets/img/home-slid.png" />
+					<img  style="" src="https://image.freepik.com/free-photo/large-cup-of-coffee-on-vintage-wooden-background-spring-flowers-and-books_308079-380.jpg" />
 				</div>
 			</a-carousel>
 			
@@ -34,30 +34,19 @@
 
 <script>
 
+
 export default {
   name: 'Home', 
-  /*components: {
-	
-  },*/
   data() {
     return {
       dotPosition: 'top',
     };
   },
-   methods: {
-         onChange(a, b, c) {
-            console.log(a, b, c);
-			},
-			
-   },
 
 }
 </script>
 
 <style lang="scss" scoped>
-
-
-	
   .home {
 	display: flex;
 	flex:1;
@@ -82,6 +71,7 @@ export default {
 		img{
 			width: 100%;
 		}
+		@include text(20px, 700, rgba(39, 34, 34, 0.253));
 
 		@include media($screen: 1440px){
             width: 130px;
@@ -116,23 +106,22 @@ export default {
     &__slider-wrap {
 		display: flex;
 		flex: 1;
-        //padding: 0px 0 20px 0;
 		position: relative;
-		background-color:#C7A17A;
 		height: 100vh;
-		//max-width: 896px;
-		
 		width: 70%;
     }
 	&__slider-slide {
 		display: flex;
         flex: 1;
         position: relative;
-		width: 70%;
+		width: 70%; 
+		@include padding-hack(100%, cover,);
+
 	} 
+	
 	& .ant-carousel{
 		text-align: center;
-		height: 100vh;
+		height: 100%;
 		line-height: 160px;
 		background: #646566;
 		overflow: hidden;
@@ -141,16 +130,10 @@ export default {
 	& .ant-carousel .slick-slide {
 		height: 100%;
 		}
-	& .ant-carousel .slick-slide img {
-		width: 100%;
-		
-		}
+	
 	& .ant-carousel .slick-list {
 		height: 100%;
-		
 		}
-	
-		
   }
 
 </style>

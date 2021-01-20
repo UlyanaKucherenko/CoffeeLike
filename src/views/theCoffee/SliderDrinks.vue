@@ -2,7 +2,7 @@
     <div class="slider-drinks">  
         <div class="slider-drinks__wrap-btn">
                 <router-link to="/coffee/all-drinks">
-                    <the-button class="coffee__btn" :class="{show : sliderShow }"  icon="arrow-right" type="" @click="handleClick">All drinks </the-button>
+                    <the-button class="coffee__btn" icon="arrow-right" type="secondary" @click="handleClick">All drinks </the-button>
                 </router-link>
             </div>
          <carousel
@@ -13,10 +13,10 @@
             :nav="false" class="slider-drinks__curousel">
             <template slot="prev"><span class="prev slider-drinks__prev"><a-icon type="left-circle" /></span></template>
 
-                <div class="slider-drinks__slide" v-for="{name,description,picture } of coffee" :key="name">
+                <div class="slider-drinks__slide" v-for="{id,name,description,picture } of coffee" :key="name">
 
                     <div class="slider-drinks__product">
-                        <div class="slider-drinks__product-card" @click="showModal">
+                        <div class="slider-drinks__product-card" @click="showModal" :id="id">
                             <div class="slider-drinks__product-wrap-image">
                                 <img class="slider-drinks__product-image" :src="require(`@/assets/img/product/${picture}.png`)" />
                             </div>
@@ -50,6 +50,7 @@
             <template slot="next"><span class="next slider-drinks__next"><a-icon type="right-circle" /></span></template>
         </carousel>
 
+<!--
         <a-modal class="the-modal"
             title='Info'
             :visible="visible"
@@ -97,19 +98,68 @@
                 </a-form-model>
             </div>
         </a-modal>
+    -->
     
-    
+    <the-modal
+        :visible="visible"
+        @handle-cancel="hideModal"
+        @handle-ok="hideModal">
+
+        <a-form-model 
+        :model="form" 
+        :label-col="labelCol" 
+        :wrapper-col="wrapperCol">
+            <div class="form__product-info">
+                <div class="form__wrap-image">
+                    <img class="form__image" src="../../assets/img/product/1.png" />
+                </div>
+                <div class="form__product-text">
+                    <h3>Americano</h3>
+                    <p>Also known as "Lungo" or "Long Black"</p>   
+                </div>
+            </div>  
+                <a-form-model-item label="Activity type">
+                    <div>
+                        <a-input-number size="large" :min="1" :max="100000" :default-value="3" @change="onChange" />
+                    </div>
+                </a-form-model-item>
+                
+                <a-form-model-item label="Size cup">
+                <a-radio-group v-model="form.resource">
+                    <a-radio value="1">
+                    small
+                    </a-radio>
+                    <a-radio value="2">
+                    middle
+                    </a-radio>
+                    <a-radio value="3">
+                    big
+                    </a-radio>
+                </a-radio-group>
+                </a-form-model-item>
+                    <a-form-model-item :wrapperol="{ span: 14, offset: 4 }">
+                <a-button type="primary" >
+                    Create
+                </a-button>
+                <a-button style="margin-left: 10px;">
+                    Cancel
+                </a-button>
+                </a-form-model-item>
+            </a-form-model>
+    </the-modal>
     
     </div>
 </template>
 
 <script>
 import carousel from 'vue-owl-carousel';
+import TheModal from '../../components/common/TheModal'
 
 export default {
     name: 'SliderDrinks',
     components: {
-        carousel,
+        carousel, 
+        TheModal
         
     },
     data() {
@@ -129,16 +179,19 @@ export default {
             visible: false,
             coffee:[
                 {
-                    name:'Americano',
+                    id: 1,
+                    name: 'Americano',
                     description: 'Also known as "Lungo" or "Long Black".',
                     picture:'3',
                 },
                 {
+                    id: 2,
                     name:'Latte',
                     description: 'Also known as "Lungo" or "Long Black".',
                     picture:'1',
                 },
                 {
+                    id: 3,
                     name:'Capuchino',
                     description: 'Also known as "Lungo" or "Long Black".',
                     picture:'2',
@@ -152,13 +205,13 @@ export default {
         }
     },
     methods: {
-         handleClick() {
+        handleClick() {
             console.log('BTN clicked');
         },
         showModal() {
             this.visible = true;
         },
-        handleCancel() {
+        hideModal() {
             this.visible = false;
         },
         onChange(value) {
@@ -180,7 +233,7 @@ export default {
             padding: 0 20px;
         }
         &__curousel {
-        padding: 30px 0px;
+        padding: 0px 10px;
        position: relative;
         }
 
@@ -206,9 +259,10 @@ export default {
              display: flex;
              flex-direction: column;
              justify-content: space-between;
-             height: 400px;
+             min-height: 400px;
              max-width: 320px;
              position: relative;
+             padding: 10px 0px 10px 10px;
         }
 
         &__product {
@@ -222,12 +276,17 @@ export default {
         &__product-card {
             display: flex;
             height: 180px;
-            
+            cursor: pointer;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.1);
+            &:hover {
+                box-shadow: 0 14px 28px rgba(0,0,0,0.3), 0 10px 10px rgba(0,0,0,0.3);
+                transition: 0.5s;
+            }
         }
 
         &__product-wrap-image {
             width: 200px;
-            @include padding-hack($padding: 63%, $size: cover);
+            @include padding-hack($padding: 60%, $size: cover);
         }
 
         &__prodect-meta {
@@ -236,7 +295,7 @@ export default {
             text-align: left;
         }
     }
-    .the-modal {
+   .form {
         @include flex(center,center);
         & .ant-modal-body {
            
