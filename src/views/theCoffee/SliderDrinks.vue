@@ -205,14 +205,14 @@ export default {
         }
     },
     methods: {
-         handleClick() {
+        handleClick() {
             console.log('BTN clicked');
         },
-       showModal() {
-        this.visible = true;
+        showModal() {
+            this.visible = true;
         },
         hideModal() {
-        this.visible = false;
+            this.visible = false;
         },
         onChange(value) {
             console.log('changed', value);
