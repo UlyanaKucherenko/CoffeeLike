@@ -8,8 +8,11 @@
                     <router-view />
                 </the-transition>
                 -->
-                <a-input-search placeholder="input search text" v-model="message" style="width: 200px" />  
-                <p>{{message}}</p>
+                <div class="coffee__filter-wrap">
+                    <a-input-search  class="coffee__input-search" placeholder="input search text" v-model="message" />  
+                    <p>{{message}}</p>
+                </div>
+                
                  <div class="coffee__products">
                     <div class="coffee__product" v-for="item of coffee" :key="item.name">
                         <div class="coffee__wrap-image">
@@ -193,6 +196,18 @@ export default {
             padding: 0 15px;
         }
 
+       &__filter-wrap {
+           width: 100%;
+           border-bottom: 1px solid rgb(185, 181, 181);
+           margin-bottom: 20px;
+           @include flex(flex-start, stretch,  column,  wrap);
+           text-align: left;
+       }
+
+        &__input-search {
+            width: 300px;
+            
+        }
         &__main-btns {
             margin-bottom: 10px;
             display: flex;
