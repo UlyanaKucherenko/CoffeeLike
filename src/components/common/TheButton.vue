@@ -15,7 +15,7 @@ export default {
     props: {
         type: {
          validator(value){
-             return ['primary','secondary','danger'].indexOf(value) !== -1;
+             return ['primary','addCart','detail','favorite'].indexOf(value) !== -1;
          },
          default: "primary",
         },
@@ -47,8 +47,9 @@ export default {
         cursor: pointer;
         transition:  background-color .2s ease;
 
-        &.secondary {
-            background-color: $test;
+        &.addCart {
+            background-color: rgb(38, 126, 38);
+              border-radius: 0px;
              &:hover {
             background-color: lighten($test, 10%);
             }
@@ -57,8 +58,10 @@ export default {
             }
         }
 
-          &.danger {
-            background-color: #eb6a6a;
+          &.detail {
+            background-color: #20141979;
+            border-radius: 0px;
+            
              &:hover {
             background-color: lighten(#eb6a6a, 10%);
             }
@@ -66,6 +69,15 @@ export default {
                 background-color: darken(#eb6a6a, 10%);
             }
         } 
+
+         &.favorite {
+            background-color: white;
+            border-radius: 0px;
+            color: rgb(38, 126, 38);
+            font-size: 30px;
+            padding: 0 5px;
+            
+        }
 
         &:hover {
             background-color: lighten(#C7A17A, 10%);

@@ -9,7 +9,7 @@ export default {
     props: {
         icon:{
             type:   String,
-            default: 'aboutus',
+            default: 'facebook',
         },
     }, 
     components: {

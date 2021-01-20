@@ -10,12 +10,14 @@ import router from './router'
 import store from './store'
 import TheButton from './components/common/TheButton';
 import XIcon from './components/common/XIcon';
+import TheTransition from './components/common/TheTransition';
 
 
 Vue.config.productionTip = false
 
 Vue.component("TheButton", TheButton);
 Vue.component("XIcon", XIcon);
+Vue.component("TheTransition", TheTransition);
 
 Vue.use(Antd);
 
