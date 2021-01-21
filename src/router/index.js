@@ -18,18 +18,25 @@ const routes = [
     name: 'Coffee',
     component: () => import(/* webpackChunkName: "coffee" */ '../views/theCoffee/Coffee.vue'),
     children: [
-      {
-        path:'all-drinks',
-        name:'AllDrinks',
-        component: () => import(/* webpackChunkName: "coffee" */ '../views/theCoffee/AllDrinks.vue'),
-      },
+      
       {
         path:'/coffee',
         name:'SliderDrinks',
         component: () => import(/* webpackChunkName: "coffee" */ '../views/theCoffee/SliderDrinks.vue'),
       }
     ]
-  }
+  },
+
+  {
+    path:'/shopping-cart',
+    name:'ShopCart',
+    component: () => import(/* webpackChunkName: "shopCart" */ '../views/ShopCart.vue'),
+  },
+  {
+    path:'/contacts',
+    name:'Contacts',
+    component: () => import(/* webpackChunkName: "contacts" */ '../views/Contacts.vue'),
+  },
 ]
 
 

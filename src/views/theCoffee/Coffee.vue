@@ -37,7 +37,7 @@
                                 <template #expandIcon="props">
                                     <a-icon type="right" :rotate="props.isActive ? 90 : 0" />
                                 </template>
-                                <a-collapse-panel key="1" header="Dateil">
+                                <a-collapse-panel key="1" header="Dateil" class="coffee__dateil-header">
                                     <p class="coffee__product-description"> {{item.description}}</p>
                                     <p>Composition of the: {{item.composition}}</p>
                                     <ul class="coffee__prices-list">
@@ -96,7 +96,7 @@ export default {
         },
     },
      methods: {
-         ...mapActions('shopCart', ['addItemToCart']),
+         ...mapActions('favoriteCoffee', ['addItemToCart']),
          selectFavorite(card) {
              this.addItemToCart(card);
          },
@@ -130,16 +130,12 @@ export default {
                 console.log('radio checked', e.target.value);
             },
     },
-    computed: {
+
+    async created() {
+        const dataCoffee = await this.getCoffee();
+        //console.log(dataCoffee[0]);
+        this.coffee = dataCoffee;
     },
-     mounted() {  
-        
-     },
-        async created() {
-            const dataCoffee = await this.getCoffee();
-            //console.log(dataCoffee[0]);
-            this.coffee = dataCoffee;
-        },
 }
 
 </script>
@@ -224,7 +220,6 @@ export default {
             flex: 1 1 24%;
             max-width: 24%;
             margin:5px 5px 10px 0px;
-            cursor: pointer;
             box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.1);
             border: 1px solid rgba(182, 180, 180, 0.5);
             
@@ -291,7 +286,14 @@ export default {
             border-color:  transparent;
             border-top-color:  #bb8855;
             border-radius:0px;
-            font-size: 20px;
+            @include text(20px,300, #232C38);
+
+            &:hover {
+                background-color: lighten(#bb8855,20%);
+                color: white;
+                transition: 0.3s;
+                @include text(20px,300, white);
+            }
         }
 
         &__prices-list {

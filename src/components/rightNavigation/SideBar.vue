@@ -30,8 +30,8 @@
                 </a-dropdown>
                 <span class="side-bar__user-name">Ulya</span>
 			</div>
-            <div  @click="handleClick">
-                <a-badge :count="cart.length" :offset="[5,0]">
+            <div class="side-bar__favorete-btn" @click="handleClick">
+                <a-badge :count="favoriteCart.length" :offset="[5,0]" :number-style="{ backgroundColor: '#52c41a' }">
                     <a-icon type="star" :style="{ fontSize: '25px' }"/>
                 </a-badge>
             </div>
@@ -45,16 +45,15 @@
                 </router-link>
             </li>
             <li class="side-bar__item">
-                <router-link to="" exact active-class="_active" class="side-bar__item-link">
+                <router-link to="/shopping-cart" exact active-class="_active" class="side-bar__item-link">
                     <a-badge :count="cart.length" :offset="[5,0]">
                         <a-icon type="shopping-cart" :style="{ fontSize: '20px' }"/>
                     </a-badge>
-                    
                    <span class="side-bar__item-text"> shopping cart</span>
                 </router-link>
             </li>
             <li class="side-bar__item">
-                <router-link to="" exact active-class="_active" class="side-bar__item-link">
+                <router-link to="/contacts" exact active-class="_active" class="side-bar__item-link">
                     <a-icon type="home" />
                     <span class="side-bar__item-text">Contacts</span>
                 </router-link>
@@ -62,11 +61,11 @@
         </ul>
 
         
-        <a-modal v-model="visible" title="Basic Modal" @ok="handleOk">
+        <a-modal v-model="visible" title="favoriteCart Modal" @ok="handleOk">
         <ul>
-            <li v-for="item in cart" :key="item.name">
+            <li v-for="item in favoriteCart" :key="item.name">
                  <a-avatar shape="square" size="35" icon="user" />
-                {{name}} 
+                {{item}} id
             </li>
         </ul>
         </a-modal>
@@ -108,6 +107,7 @@ export default {
     },
      computed: {
         ...mapState("shopCart",["cart"]),
+        ...mapState("favoriteCoffee",["favoriteCart"]),
     },
      mounted() {  
         console.log(this.cart);
@@ -157,6 +157,9 @@ export default {
             margin-left: 5px;
         }
 
+        &__favorete-btn {
+            cursor: pointer;
+        }
         &__list {
 
         }
