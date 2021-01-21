@@ -1,13 +1,15 @@
 export const routesNames = {
     home: 'Home',
     coffe: 'Coffee',
-    allDrinks:'AllDrinks',
+    shopCart:'ShopCart',
+    contacts: 'Contacts',
     sliderDrinks:'SliderDrinks'
 }
 
 export const routesPath = {
     home: '/',
     coffe: '/coffee',
-    allDrinks:'allDrinks',
+    shopCart:'/shopping-cart',
+    contacts: '/contacts',
     sliderDrinks:'/coffee'
 }
