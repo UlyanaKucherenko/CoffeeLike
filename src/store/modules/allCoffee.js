@@ -1,10 +1,10 @@
 const state = () => ({
-    coffee: [],
+    allCoffee: [],
 });
 
 const  mutations ={
     changeCartState(state, payload) {
-        state.cart = [...state.cart, payload];
+        state.allCoffee = [...state.allCoffee, payload];
     },
 };
 const  actions = {

@@ -68,10 +68,8 @@ export default {
 	&__logo-link {
 		display: inline-block;
 		width: 200px;
-		img{
-			width: 100%;
-		}
-		@include text(20px, 700, rgba(39, 34, 34, 0.253));
+		
+		@include text(30px, 700, rgb(24, 23, 23));
 
 		@include media($screen: 1440px){
             width: 130px;

@@ -8,12 +8,29 @@
                     <router-view />
                 </the-transition>
                 -->
-                <div class="coffee__filter-wrap">
-                    <a-input-search  class="coffee__input-search" placeholder="input search text" v-model="message" />  
-                    <p>{{message}}</p>
-                </div>
-                
-                 <div class="coffee__products">
+                 <div class="coffee__search-wrap">
+                     <div class="coffee__search">
+                         <input class="coffee__input-search" v-model="textSearch" placeholder="Search by name...">
+                        <button class="coffee__button-search" @click="search()"><a-icon type="search" /></button>
+                     </div>
+                     <div class="coffee__filter-wrap">
+                        <a-select class="coffee__select"
+                            ref="categoriesRef"
+                            allowClear
+                            style=""
+                            @change="changeCategory"
+                            :placeholder="selectedCategories">
+
+                            <a-select-option class="coffee__select-option"
+                            v-for="category in categories" :key="category"
+                            :value="category">
+                                {{category}}
+                            </a-select-option>
+                        </a-select> 
+                    </div>
+                 </div>
+                 <pulse-loader class="coffee__spiner" :loading="loading" :color="colorSpiner"></pulse-loader>
+                 <div class="coffee__products" v-if="!loading">
                     <div class="coffee__product" v-for="item of coffee" :key="item.name">
                         <div class="coffee__wrap-image">
                             <img :src=item.picture />
@@ -74,68 +91,138 @@ import {firestore} from '../../firebase/firebase.utils.js'
 import TheModal from '../../components/common/TheModal'
 import formOder from '../../components/forms/formOder.vue'
 import { mapActions } from 'vuex'
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+
 
 export default {
+
     name: 'Coffee',
     components: {
     TheModal,
-    formOder
+    formOder,
+    PulseLoader,
     },
     data() {
         return {
             coffee:[],
             visible: false,
-            value:1,
-            //message: 'Привет, Vue!',
+            textSearch: '',
+            loading: false,
+            colorSpiner: ' green',
+            categories: [
+                "all drinks",
+                "cocktail",
+                "Classic drinks",
+                "Author's teas",
+            ],
+            selectedCategories:'all drinks',
         }
     },
-    props :{
-        message: {
-            type: String,
-            default: "input ",
-        },
-    },
      methods: {
-         ...mapActions('favoriteCoffee', ['addItemToCart']),
-         selectFavorite(card) {
-             this.addItemToCart(card);
-         },
 
-          async getCoffee() {
+        search(){
+            console.log('search name'); 
+            this.searchByName();
+        },
+
+         //select
+        changeCategory(value) {
+            this.selectedCategories = value;
+            console.log('value', value);
+            this.loading = true;
+
+            if(this.selectedCategories === 'all drinks'){
+                console.log('all drinks');
+                this.getCategoryAllDrinks(); 
+            }
+            else {
+                this.getDrinksByCategory(); 
+            }
+        },
+
+        ...mapActions('favoriteCoffee', ['addItemToCart']),
+        selectFavorite(card) {
+            this.addItemToCart(card);
+        },
+
+        async searchByName() {
             try {
                 let coffee =[];
-                const res = firestore.collection('coffee');
-                //firestore.collection("coffee").where("name", "==", this.massage)
+                 this.loading = true;
+                const res = firestore.collection(`coffee`).where("name", "==", `${this.textSearch}`);
                 const parsedRes = await res.get();
                 parsedRes.forEach(function(item) {
                     coffee.push( item.data());
-                //console.log(item.data());
                 });
-                return coffee;
+               this.coffee = coffee;
+                this.loading = false;
             } catch (error) {
                 console.error(error);
             }
-          },
+        },
+
+        async getAllDrinks() {
+            try {
+                let coffee =[];
+                 this.loading = true;
+                const res = firestore.collection(`coffee`);
+                const parsedRes = await res.get();
+                parsedRes.forEach(function(item) {
+                    coffee.push( item.data());
+                });
+               return coffee;
+            } catch (error) {
+                console.error(error);
+            }
+        },
+
+        async getCategoryAllDrinks() {
+            try {
+                let coffee =[];
+                 this.loading = true;
+                const res = firestore.collection(`coffee`);
+                const parsedRes = await res.get();
+                parsedRes.forEach(function(item) {
+                    coffee.push( item.data());
+                });
+                this.coffee = coffee;
+                this.loading = false;
+            } catch (error) {
+                console.error(error);
+            }
+        },
           
-          showDetail() {
+        async getDrinksByCategory() {
+            try {
+                let coffee =[];
+                const res = firestore.collection("coffee").where("category", "==", `${this.selectedCategories}`);
+                const parsedRes = await res.get();
+                parsedRes.forEach(function(item) {
+                    coffee.push( item.data());
+                });
+                  this.coffee = coffee;
+                  this.loading = false;
+                
+            } catch (error) {
+                console.error(error);
+            }
+        },
+
+        showDetail() {
             this.visible = true;
-            },
-            hideModal() {
+        },
+        hideModal() {
             this.visible = false;
-            },
-            onChange(value) {
-                console.log('changed', value);
-            },
-            onChangeRadio(e) {
-                console.log('radio checked', e.target.value);
-            },
+        },
     },
 
     async created() {
-        const dataCoffee = await this.getCoffee();
-        //console.log(dataCoffee[0]);
+        const dataCoffee = await this.getAllDrinks();
         this.coffee = dataCoffee;
+        this.loading = false;
     },
+    
+   
 }
 
 </script>
@@ -178,7 +265,7 @@ export default {
             line-height: 34px;
             color: #415167;
             text-transform: uppercase;
-            margin-bottom: 30px;
+            margin-bottom: 55px;
         }
 
         &__main {
@@ -187,29 +274,56 @@ export default {
             width: 100%;
         }
 
+         &__search-wrap {
+            @include flex(space-between,center,row);
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgb(192, 190, 190);
+            padding-bottom: 20px;
+            }
+
+         &__search{
+            @include flex(flex-start,center,row);
+             width: 50%;
+
+            }
+
+        &__input-search {
+            max-width: 300px;
+            width: 100%;
+            padding: 0 15px;
+            @include flex(center,center,row);
+            min-height: 50px;
+            border: 1px solid  rgb(192, 190, 190);
+            overflow: hidden;
+            outline: none;
+            @include text(18px,400, #5c5959);
+        }
+        &__button-search {
+            padding: 0 24px;
+            @include flex(center,center,row);
+            min-height: 50px;
+            border: none;
+            background-color: #415167;
+            color:white;
+            cursor: pointer;
+        }
+
+
+        &__filter-wrap {
+            @include flex(flex-end,center,row);
+        }
+
+        &__select {
+            width: 300px;
+        }
+
+        &__spiner {
+            display: flex;
+            justify-content: center;
+        }
         &__main-content {
             width: 100%;
             padding: 0 15px;
-        }
-
-       &__filter-wrap {
-           width: 100%;
-           border-bottom: 1px solid rgb(185, 181, 181);
-           margin-bottom: 20px;
-           @include flex(flex-start, stretch,  column,  wrap);
-           text-align: left;
-       }
-
-        &__input-search {
-            width: 300px;
-            
-        }
-        &__main-btns {
-            margin-bottom: 10px;
-            display: flex;
-            width: 100%;
-            justify-content: flex-end;
-            padding: 0 20px;
         }
 
         &__products {
