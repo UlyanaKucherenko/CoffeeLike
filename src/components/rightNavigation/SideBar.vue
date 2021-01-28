@@ -2,18 +2,7 @@
     <div class="side-bar">
         
         <div class="side-bar__user-btn">
-            <!--
-			<div>
-				<div id="components-badge-demo-title">
-                    <a-badge :count="5" title="Custom hover text">
-                    <a href="#" class="head-example">
-                        <a-icon type="shopping-cart" :style="{ fontSize: '42px', color: '#F9F5E8' }" />
-                    </a>
-                    </a-badge>
-                </div>
-			</div>
-            -->
-			<div>
+			<div class="side-bar__user-btn-profil">
                 <a-dropdown :trigger="['click']">
                     <a class="ant-dropdown-link" @click="e => e.preventDefault()">
                         <a-avatar style="backgroundColor:#87d068" icon="user"  />
@@ -35,7 +24,6 @@
                     <a-icon type="star" :style="{ fontSize: '25px' }"/>
                 </a-badge>
             </div>
-           
 		</div>
 
         <ul  class="side-bar__list">
@@ -59,13 +47,12 @@
                 </router-link>
             </li>
         </ul>
-
-        
         <a-modal v-model="visible" title="favoriteCart Modal" @ok="handleOk">
         <ul>
-            <li v-for="item in favoriteCart" :key="item.name">
-                 <a-avatar shape="square" size="35" icon="user" />
+            <li v-for="item in favoriteCart" :key="item.id">
+                 <a-avatar shape="square" :size="35" icon="user" />
                 {{item}} id
+                {{item.name}}
             </li>
         </ul>
         </a-modal>
@@ -110,8 +97,7 @@ export default {
         ...mapState("favoriteCoffee",["favoriteCart"]),
     },
      mounted() {  
-        console.log(this.cart);
-
+        console.log(this.favoriteCart);
      },
    
 }
@@ -133,8 +119,8 @@ export default {
         @include media($screen: 1660px){
         max-width: 320px;
         }
-        @include media($screen: $screen-desktop){
-            max-width: 200px;
+        @include media($screen: 1240px){
+            max-width: 250px;
             padding: 30px 15px 0 15px;
         }
 
@@ -142,12 +128,10 @@ export default {
 
             width: 100%;
             @include flex($justify-content: space-between, $align-items: center, $direction: row, $wrap: wrap);
-
             color:white;
             min-height: 40px;
             margin-bottom: 40px;
 
-            //$screen-tablet-large
             @include media($screen: $screen-tablet-large){
                 @include flex($justify-content: space-between, $align-items: center, $direction: column, $wrap: wrap);
 
@@ -160,12 +144,20 @@ export default {
         &__favorete-btn {
             cursor: pointer;
         }
+        
         &__list {
-
+            margin-bottom: 0;
+            @include flex(center,center,column);
         }
 
         &__item {
             margin-bottom: 30px;
+            max-width: 250px;
+            width: 100%;
+
+            &:last-child {
+                 margin-bottom: 0px;
+            }
         }
 
         &__item-link {
@@ -175,14 +167,12 @@ export default {
             font-size: 16px;
             color: #F9F5E8;
             text-transform: uppercase;
-
             background-color: #C7A17A;
-           
             border-radius: 19px;
             border: none;
             outline: none;
             @include flex(flex-start,center);
-            height: 46px;
+            min-height: 50px;
             padding: 0 24px;
             cursor: pointer;
             transition: all 0.3s ease-out;

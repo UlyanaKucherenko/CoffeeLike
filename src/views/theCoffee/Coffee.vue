@@ -3,15 +3,11 @@
         <h2 class="coffee__title">Choose Your Coffee</h2>
         <div class="coffee__main">
             <div class="coffee__main-content">
-                <!--
-                <the-transition >
-                    <router-view />
-                </the-transition>
-                -->
+                <!-- Search Filter-->
                  <div class="coffee__search-wrap">
                      <div class="coffee__search">
                          <input class="coffee__input-search" v-model="textSearch" placeholder="Search by name...">
-                        <button class="coffee__button-search" @click="search()"><a-icon type="search" /></button>
+                        <button class="coffee__button-search" @click="inputSearch()"><a-icon type="search" /></button>
                      </div>
                      <div class="coffee__filter-wrap">
                         <a-select class="coffee__select"
@@ -29,8 +25,11 @@
                         </a-select> 
                     </div>
                  </div>
+
+                  <!--Products-->
                  <pulse-loader class="coffee__spiner" :loading="loading" :color="colorSpiner"></pulse-loader>
                  <div class="coffee__products" v-if="!loading">
+                     <!--Product card-->
                     <div class="coffee__product" v-for="item of coffee" :key="item.name">
                         <div class="coffee__wrap-image">
                             <img :src=item.picture />
@@ -45,7 +44,7 @@
                             </p>
 
                             <div class="coffee__product-btns">
-                                <the-button class="coffee__product-btn" type="addCart" @click="showDetail(item.id)">
+                                <the-button class="coffee__product-btn" type="addCart" @click="showFormOder(item.id)">
                                     Add <a-icon type="shopping-cart" class="" />
                                 </the-button>   
                             </div>
@@ -76,30 +75,30 @@
             </div> 
         </div>
        
-        <the-modal
+        <!-- Modal add-->
+       <the-modal
         :visible="visible"
         @handle-cancel="hideModal"
         @handle-ok="hideModal">
             <form-oder />
-        </the-modal>    
+        </the-modal>  
     </div>
 </template>
 
 <script>
 
 import {firestore} from '../../firebase/firebase.utils.js'
-import TheModal from '../../components/common/TheModal'
-import formOder from '../../components/forms/formOder.vue'
+import TheModal from '../../components/common/TheModal.vue'
+import FormOder from '../../components/forms/FormOder.vue'
 import { mapActions } from 'vuex'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
-
 
 export default {
 
     name: 'Coffee',
     components: {
     TheModal,
-    formOder,
+    FormOder,
     PulseLoader,
     },
     data() {
@@ -120,12 +119,11 @@ export default {
     },
      methods: {
 
-        search(){
+        inputSearch(){
             console.log('search name'); 
             this.searchByName();
         },
 
-         //select
         changeCategory(value) {
             this.selectedCategories = value;
             console.log('value', value);
@@ -170,7 +168,7 @@ export default {
                 parsedRes.forEach(function(item) {
                     coffee.push( item.data());
                 });
-               return coffee;
+                return coffee;
             } catch (error) {
                 console.error(error);
             }
@@ -208,7 +206,8 @@ export default {
             }
         },
 
-        showDetail() {
+        showFormOder(item) {
+            console.log('btn-dateil', item);
             this.visible = true;
         },
         hideModal() {
@@ -222,7 +221,6 @@ export default {
         this.loading = false;
     },
     
-   
 }
 
 </script>
@@ -380,9 +378,6 @@ export default {
             @include text(23px,300, #232C38);  
         }
         &__product-description {
-           /* white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis; */
             @include text(14px,300, #232C38);  
         }
 

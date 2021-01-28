@@ -9,26 +9,13 @@
                     <p>Also known as "Lungo" or "Long Black"</p>   
                 </div>
             </div>
-            <div class="">
-                <a-input-number size="large" :min="1" :max="10" :default-value="3" @change="onChange" />
-                <a-radio-group v-model="value" @change="onChangeRadio">
-                    <a-radio :value="1">
-                        A
-                    </a-radio>
-                    <a-radio :value="2">
-                        B
-                    </a-radio>
-                    <a-radio :value="3">
-                        C
-                    </a-radio>
-                </a-radio-group>
-            </div>
+           
         </div>
 </template>
 
 <script>
 export default {
-    name: 'formOder',
+    name: 'FormOder',
 }
 </script>
 <style lang="scss">

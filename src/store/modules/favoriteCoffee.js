@@ -3,13 +3,13 @@ const state = () => ({
 });
 
 const  mutations ={
-    changeCartState(state, payload) {
+    changeFavoriteCartState(state, payload) {
         state.favoriteCart = [...state.favoriteCart, payload];
     },
 };
 const  actions = {
     addItemToCart: async ({commit}, payload) =>{
-        commit("changeCartState", payload);
+        commit("changeFavoriteCartState", payload);
     },
 };
 export default {

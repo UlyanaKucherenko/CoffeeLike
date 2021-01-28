@@ -17,7 +17,7 @@ export default new Vuex.Store({
   },
   modules: {
     shopCart,
-    favoriteCoffee
+    favoriteCoffee,
   },
 
 });

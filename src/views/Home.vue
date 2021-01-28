@@ -11,9 +11,9 @@
 		</h1>
 	</div>
 	
-		<div class="home__slider-wrap">
+	<div class="home__main">
 			
-			<a-carousel 
+		<!--	<a-carousel 
 			:dot-position="dotPosition"
 			:autoplay="false"
 			:speed="3000"
@@ -25,8 +25,8 @@
 				<div class="home__slider-slide">
 					<img  style="" src="https://image.freepik.com/free-photo/large-cup-of-coffee-on-vintage-wooden-background-spring-flowers-and-books_308079-380.jpg" />
 				</div>
-			</a-carousel>
-			
+			</a-carousel>-->
+				
 		</div>
    
   </div>
@@ -57,12 +57,26 @@ export default {
         width: 30%;
         max-width: 400px;
         flex: 1;
-        padding: 70px 0px 0px 60px ;
+        padding: 70px 0px 0px 30px ;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: flex-start;
 		position: relative;
+
+		@include media($screen: 1660px){
+		max-width: 320px;
+		}
+
+		@include media($screen: 1440px){
+			max-width: 265px;
+		}
+
+		@include media($screen: 1240px){
+            max-width: 250px;
+            padding: 50px 0px 0 15px;
+        }
+		
     }
 
 	&__logo-link {
@@ -83,11 +97,11 @@ export default {
 		margin-bottom: 0;
 		position: absolute;
 		bottom:80px;
+		left: 105px;
 		font-family: Montserrat;
 		font-style: normal;
 		font-weight: 900;
 		font-size: $title-size;
-		
 		color: #415167;
 		z-index: 2;
 
@@ -96,19 +110,31 @@ export default {
 			color:white;
 			padding: 0 10px;
 		}
+
+		@include media($screen: 1660px){
+			left:30px;
+        }
 		@include media($screen: 1440px){
-            font-size: 54px;
+			font-size: 54px;
+			bottom:40px;
+        }
+
+		@include media($screen: 1240px){ 
+			left: 20px;
+			font-size: 44px;
         }
 	}
 
-    &__slider-wrap {
+    &__main {
 		display: flex;
 		flex: 1;
 		position: relative;
-		height: 100vh;
+		//min-height: 100vh;
 		width: 70%;
+		//@include padding-hack(100%, cover);
+		background-color:#726f6b;
     }
-	&__slider-slide {
+/*	&__slider-slide {
 		display: flex;
         flex: 1;
         position: relative;
@@ -131,7 +157,7 @@ export default {
 	
 	& .ant-carousel .slick-list {
 		height: 100%;
-		}
+		}*/
   }
 
 </style>
