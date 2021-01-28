@@ -48,7 +48,6 @@
                                     Add <a-icon type="shopping-cart" class="" />
                                 </the-button>   
                             </div>
-                            
                             <a-collapse accordion class="coffee__product-dateil">
                                 <template #expandIcon="props">
                                     <a-icon type="right" :rotate="props.isActive ? 90 : 0" />
