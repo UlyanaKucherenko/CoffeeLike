@@ -12,36 +12,47 @@
 	</div>
 	
 	<div class="home__main">
-			
-		<!--	<a-carousel 
-			:dot-position="dotPosition"
-			:autoplay="false"
-			:speed="3000"
-			:fade="true"
-			>
-				<div class="home__slider-slide">
-					<img class="home__slider-image" src="../assets/img/home-slid.png" />
-				</div>
-				<div class="home__slider-slide">
-					<img  style="" src="https://image.freepik.com/free-photo/large-cup-of-coffee-on-vintage-wooden-background-spring-flowers-and-books_308079-380.jpg" />
-				</div>
-			</a-carousel>-->
-				
-		</div>
+	
+	</div>
    
   </div>
 </template>
 
 <script>
-
-
+import {firestore} from '../firebase/firebase.utils.js'
+import {mapActions} from 'vuex'
 export default {
   name: 'Home', 
   data() {
     return {
-      dotPosition: 'top',
+	dotPosition: 'top', 
     };
   },
+  methods:{
+	async getAllDrinks() {
+            try {
+                const res = firestore.collection(`coffee`);
+				const parsedRes = await res.get();
+				let getData =[];
+                parsedRes.forEach(function(item) {
+                    getData.push( item.data());
+                });
+                return getData;
+			} 
+			catch (error) {
+				console.log(error)
+            }
+		},
+		
+		...mapActions('allDrinks', ['addItemToAllDrinks']),
+  },
+
+    async created() {
+		const dataDrinks = await this.getAllDrinks();
+		dataDrinks.forEach(item =>{
+			this.addItemToAllDrinks(item);
+		});
+    },
 
 }
 </script>
@@ -50,7 +61,7 @@ export default {
   .home {
 	display: flex;
 	flex:1;
-	height: 100vh;
+	height: 100%;
 	text-align: center;
 	width: 70%;
     &__decor{
@@ -58,11 +69,8 @@ export default {
         max-width: 400px;
         flex: 1;
         padding: 70px 0px 0px 30px ;
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		justify-content: flex-start;
 		position: relative;
+		@include flex(flex-start, flex-start, column);
 
 		@include media($screen: 1660px){
 		max-width: 320px;
@@ -75,21 +83,18 @@ export default {
 		@include media($screen: 1240px){
             max-width: 250px;
             padding: 50px 0px 0 15px;
-        }
-		
+        }	
     }
 
 	&__logo-link {
 		display: inline-block;
 		width: 200px;
-		
 		@include text(30px, 700, rgb(24, 23, 23));
 
 		@include media($screen: 1440px){
             width: 130px;
         }
 	}
-
 
 	&__title {
 		text-align: left;
@@ -129,35 +134,22 @@ export default {
 		display: flex;
 		flex: 1;
 		position: relative;
-		//min-height: 100vh;
-		width: 70%;
-		//@include padding-hack(100%, cover);
-		background-color:#726f6b;
-    }
-/*	&__slider-slide {
-		display: flex;
-        flex: 1;
-        position: relative;
-		width: 70%; 
-		@include padding-hack(100%, cover,);
+		width: 100%;
+		background-color:#666464;
 
-	} 
-	
-	& .ant-carousel{
-		text-align: center;
-		height: 100%;
-		line-height: 160px;
-		background: #646566;
-		overflow: hidden;
-		width:calc(72vw);
+		&:before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			display: block;
+			background: url("../assets/img/home-slid.png") no-repeat center;
+			background-size: cover;
+			z-index: 0;
 		}
-	& .ant-carousel .slick-slide {
-		height: 100%;
-		}
-	
-	& .ant-carousel .slick-list {
-		height: 100%;
-		}*/
+    }
   }
 
 </style>

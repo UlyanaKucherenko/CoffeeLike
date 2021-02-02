@@ -89,7 +89,7 @@
 import {firestore} from '../../firebase/firebase.utils.js'
 import TheModal from '../../components/common/TheModal.vue'
 import FormOder from '../../components/forms/FormOder.vue'
-import { mapActions } from 'vuex'
+import { mapActions, mapState} from 'vuex'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
 export default {
@@ -116,7 +116,8 @@ export default {
             selectedCategories:'all drinks',
         }
     },
-     methods: {
+
+    methods: {
 
         inputSearch(){
             console.log('search name'); 
@@ -153,21 +154,6 @@ export default {
                 });
                this.coffee = coffee;
                 this.loading = false;
-            } catch (error) {
-                console.error(error);
-            }
-        },
-
-        async getAllDrinks() {
-            try {
-                let coffee =[];
-                 this.loading = true;
-                const res = firestore.collection(`coffee`);
-                const parsedRes = await res.get();
-                parsedRes.forEach(function(item) {
-                    coffee.push( item.data());
-                });
-                return coffee;
             } catch (error) {
                 console.error(error);
             }
@@ -214,10 +200,12 @@ export default {
         },
     },
 
+    computed: {
+    ...mapState("allDrinks",["allDrinks"]),
+    },
+
     async created() {
-        const dataCoffee = await this.getAllDrinks();
-        this.coffee = dataCoffee;
-        this.loading = false;
+        this.coffee = this.allDrinks;
     },
     
 }
@@ -228,30 +216,23 @@ export default {
 
     .coffee {
         text-align: center;
-         flex: 1;
-            width: 70%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding-top: 50px;
+        flex: 1;
+        width: 70%;
+        @include flex(flex-start,center,column);
+        padding-top: 50px;
+
         &__container {
             padding-top:30px ;
             padding-right: 20px;
             position: relative;
             flex: 1;
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            @include flex(center,center,column);
         }
 
         &__content {
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            @include flex(center,center,column);
         }
 
         &__title {

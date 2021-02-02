@@ -1,4 +1,4 @@
-import {shopCart,favoriteCoffee} from './modules';
+import {shopCart,favoriteCoffee,allDrinks} from './modules';
 
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -16,8 +16,10 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    allDrinks,
     shopCart,
-    favoriteCoffee,
+    favoriteCoffee
+
   },
 
 });

@@ -47,6 +47,7 @@
                 </router-link>
             </li>
         </ul>
+
         <a-modal v-model="visible" title="favoriteCart Modal" @ok="handleOk">
         <ul>
             <li v-for="item in favoriteCart" :key="item.id">
@@ -92,7 +93,7 @@ export default {
             this.visible = false;
         },
     },
-     computed: {
+    computed: {
         ...mapState("shopCart",["cart"]),
         ...mapState("favoriteCoffee",["favoriteCart"]),
     },
@@ -112,20 +113,7 @@ export default {
     }
 
     .side-bar {
-        position: fixed;
-        width: 30%;
-        max-width: 400px;
-        padding: 30px 30px 0 30px;
-        @include media($screen: 1660px){
-        max-width: 320px;
-        }
-        @include media($screen: 1240px){
-            max-width: 250px;
-            padding: 30px 15px 0 15px;
-        }
-
          &__user-btn {
-
             width: 100%;
             @include flex($justify-content: space-between, $align-items: center, $direction: row, $wrap: wrap);
             color:white;

@@ -39,30 +39,27 @@ export default {
 
       &__content {
         flex: 1;
-        width: 70%;
         display: flex;
         justify-content: center;
-        //padding: 20px;
-          /*  & > *{
-                flex:1;
-            }*/
+        height: 100vh;
+        overflow-y: scroll;
+        padding-right: 280px;
+        
       }
 
       &__right-nav{
         width: 30%;
-        max-width: 400px;
         background-color: #3b3c3d;
         flex: 1;
-        //padding: 30px 30px 0 30px;
         display: flex;
         justify-content: center;
-        @include media($screen: 1660px){
-        max-width: 320px;
-        }
-        @include media($screen: 1240px){
-        max-width: 250px;
-         //padding: 30px 15px 0 15px;
-        }
+        max-width: 300px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        padding-top: 30px;
+        
       }
     }
 </style>
