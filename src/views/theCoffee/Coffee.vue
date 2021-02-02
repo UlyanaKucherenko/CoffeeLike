@@ -79,7 +79,7 @@
         :visible="visible"
         @handle-cancel="hideModal"
         @handle-ok="hideModal">
-            <form-oder />
+           
         </the-modal>  
     </div>
 </template>
@@ -88,7 +88,6 @@
 
 import {firestore} from '../../firebase/firebase.utils.js'
 import TheModal from '../../components/common/TheModal.vue'
-import FormOder from '../../components/forms/FormOder.vue'
 import { mapActions, mapState} from 'vuex'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
 
@@ -97,7 +96,6 @@ export default {
     name: 'Coffee',
     components: {
     TheModal,
-    FormOder,
     PulseLoader,
     },
     data() {
@@ -120,18 +118,17 @@ export default {
     methods: {
 
         inputSearch(){
-            console.log('search name'); 
-            this.searchByName();
+        this.searchByName();
         },
 
         changeCategory(value) {
             this.selectedCategories = value;
-            console.log('value', value);
+            //console.log('value', value);
             this.loading = true;
 
             if(this.selectedCategories === 'all drinks'){
-                console.log('all drinks');
-                this.getCategoryAllDrinks(); 
+                //console.log('all drinks');
+            this.getCategoryAllDrinks(); 
             }
             else {
                 this.getDrinksByCategory(); 
@@ -154,8 +151,8 @@ export default {
                 });
                this.coffee = coffee;
                 this.loading = false;
-            } catch (error) {
-                console.error(error);
+            }catch(Error) {
+                console.error(Error);
             }
         },
 
@@ -170,8 +167,8 @@ export default {
                 });
                 this.coffee = coffee;
                 this.loading = false;
-            } catch (error) {
-                console.error(error);
+            } catch(error) {
+                    console.error(error);
             }
         },
           
@@ -186,13 +183,13 @@ export default {
                   this.coffee = coffee;
                   this.loading = false;
                 
-            } catch (error) {
+            } catch(error) {
                 console.error(error);
             }
         },
 
-        showFormOder(item) {
-            console.log('btn-dateil', item);
+        showFormOder() {
+            //console.log('btn-dateil', item);
             this.visible = true;
         },
         hideModal() {
