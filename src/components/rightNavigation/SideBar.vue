@@ -42,7 +42,7 @@
             </li>
             <li class="side-bar__item">
                 <router-link to="/contacts" exact active-class="_active" class="side-bar__item-link">
-                    <a-icon type="home" />
+                    <a-icon type="environment" />
                     <span class="side-bar__item-text">Contacts</span>
                 </router-link>
             </li>
@@ -52,7 +52,7 @@
         <ul>
             <li v-for="item in favoriteCart" :key="item.id">
                  <a-avatar shape="square" :size="35" icon="user" />
-                {{item}} id
+                {{item.id}} 
                 {{item.name}}
             </li>
         </ul>
@@ -92,10 +92,12 @@ export default {
             console.log(e);
             this.visible = false;
         },
+
     },
     computed: {
         ...mapState("shopCart",["cart"]),
         ...mapState("favoriteCoffee",["favoriteCart"]),
+        ...mapState('allDrinks', ['allDrinks']),
     },
      mounted() {  
         console.log(this.favoriteCart);

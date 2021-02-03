@@ -1,33 +1,41 @@
 <template>
-    <div id="contact" class="contacts">   
-           
-        <div class="contacts__bg">
-                <x-icon icon=pin />
-        </div>
-        <div class="contacts__wrapp-content">
-            <div class="contacts__container container">
-                <span class="contacts__icon">
-                    <x-icon icon=layer />
-                </span>
-                <h3 class="contacts__title">our contacts</h3>
-
-                <form action="" method="post" class="contacts__form">
-                    <input class="contacts__input" type="text" name="name" placeholder="Your Name *" />
-                    <input class="contacts__input" type="email" name="email" placeholder="Your Email *" />
-                    <textarea class="contacts__textarea" placeholder="Your Message *"></textarea>
-                    <button class="contacts__form-btn" type="submit">SEND MESSAGE</button>
-                </form>
+    <div class="contacts">   
+        <div class="contacts__container">
+            <x-icon icon=pin class="contacts__title-icon"/>
+            <h3 class="contacts__title">our contacts</h3>
+            <div class="contacts__main">
+                <div class="contacts__info">
+                    <ul class="contacts__social-links">
+                        <li class="contacts__social-links-item">
+                            <a href="#"  target="_blank" class="contacts__link">
+                                <a-icon type="facebook" />
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank" class="contacts__link">
+                                <a-icon type="instagram" />
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="contacts__tel"><a-icon type="phone" /><a href="tel:+1234567890"> +1234567890</a></p>
+                    <p class="contacts__adress"><a-icon type="environment" /> Profesora Michała Życzkowskiego 37</p>
+                </div>
+                
+                <div class="contacts__map-wrap">
+                    <iframe class="contacts__map"      
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4946.718475041292!2d19.99624863863642!3d50.07540269832203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1612366491659!5m2!1sru!2sua" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
             </div>
-           
         </div>
     </div>
 </template>
 
 <script>
-import XIcon from '../components/common/XIcon'
+import XIcon from '../components/common/XIcon.vue'
+
 export default {
     name: 'Contacts',
-    components: { 
+    components: {
         XIcon
      },
     
@@ -35,140 +43,106 @@ export default {
 </script>
 <style  lang="scss" scoped>
     .contacts {
-        height: 900px;
+        text-align: center;
+        flex: 1;
+        width: 70%;
+        height: 100%;
         position: relative;
-        width: 100%;
-
-        &__bg {
-           
-            position: absolute;
-            color:#5c5c5c;
-            z-index: 0;
-            display: inline-block;
-            top: 231px;
-            left: 56%;
+        z-index: 1;
+        
+        &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+        background: url("../assets/img/our-contact.jpg") no-repeat center;
+        background-size: cover;
+        z-index: 0;
         }
 
-        &__wrapp-content {
-            z-index: 1;
-            position: absolute;
-            top:0;
-            width: 100%;
-            height:100%;
-            padding: 50px 0;
+        &__container{
+            position: relative;
+            @include flex(flex-start,center,column);
+            padding: 30px 0px 0px;
+            height: 100%;
+            background-color: rgba(#777d86,0.5);
         }
 
-        &__container {
-             @include flex(center, center, column);
-             text-align: center;
-        }
-
-        &__icon {
-            margin-bottom: 25px;
+        &__title-icon{
+            margin-bottom: 30px;
         }
 
         &__title {
-            margin-bottom: 270px;
-            font-family:  ProximaNova;
-            @include text(36px, 400, #2b2828); 
+            @include text(35px, 900, #fff);
+            font-family: Montserrat;
             text-transform: uppercase;
-
-            @include media(879px) {
-               margin-bottom: 100px;
-
-            }
+            margin-bottom: 60px;
         }
 
-        &__form {
-            max-width:860px;
-            width: 100%;
-            @include flex(center, center, row, wrap);
-            font-family: 'PT Sans', sans-serif;
-
-            @include media(879px) {
-                margin-right: 20px;
-                @include flex(center, center, column, wrap);
-                 max-width:420px;
-                width: 100%;
-            }
+        &__main {
+            background-color: rgba(#575b61,0.8);
+            width: 70%;
+            @include flex(center,center,row);
+            position: relative;
+            padding: 10px;
         }
-        &__input {
-            max-width:415px;
+
+        &__map-wrap{
             width: 50%;
-            margin-right: auto;
-            margin-bottom: 30px;
-            padding: 0 15px;
-            height: 60px;
-            @include flex(flex-start, center, row);
-            border:none;
-            overflow: hidden;
-            background-color: rgba(#2b2828,0.5);
-            @include text(18px,400, #5c5959);
-            &::-webkit-input-placeholder { /* WebKit browsers */
-            @include text(18px,400, white);
+            position: relative;
+            background-color:#777d86;
         }
-            
-            font-style: italic;
-  
-            @include media(960px) {
-               margin-right: 20px;
-            }
-            @include media(879px) {
-               margin-right: 0px;
-               width: 100%;
-
-            }
-            
-        }
-        &__input[type=email] {
-            margin-right: 0;
-        }
-        &__textarea {
+        &__map{
             width: 100%;
-            height: 200px;
-            background-color: rgba(#2b2828,0.5);
-            border:none;
-            padding: 10px 15px 0 15px;
-            overflow: hidden;
-            margin-bottom: 50px;
-            @include text(18px,400,  #5c5959);
-            font-style: italic;
-            &::-webkit-input-placeholder { /* WebKit browsers */
-            @include text(18px,400, white);
-            }
         }
 
-        &__form-btn {
-            max-width: 293px;
-            width: 100%;
-            height: 70px;
-            padding:  0 15;
-            border-radius: 4px;
-            background-color: #9f9acf;
-            border: none;
-            border-bottom: 4px solid rgba($color: #000000, $alpha: 0.3); 
-            outline:none;
-            @include flex(center, center, row);
-            cursor: pointer;
+        &__info{
+            width:50%;
+            @include flex(center,flex-start,column);
+            text-align: left;
+            @include text(17px, 400, #fff);
+        }
 
-            @include text(20px, 700, #FFFFFF); 
-            text-transform: uppercase;
-            font-family: ProximaNova;
-            letter-spacing: 0.4px;
-            text-align: center;
-            
-            &:hover {
-                background-color: rgba(#646161,0.8);
-                transition: all .3s ease-in;
-                border-bottom: none;
+        &__social-links {
+             @include flex(center,center,row);
+             font-size: 45px;
+             width: 100%;
+        }
+
+         &__social-links-item {
+             margin-right: 20px;
+             &:last-child{
+                 margin-right: 0;
+             }
+        }
+
+        &__link{
+            color: #C7A17A;
+             &:hover {
+            color: darken( #C7A17A, 10%);
             }
-
             &:active {
-                background-color: rgba(#ffbe33,1);
-                transition: all .1s ease-in;
-                outline:none;
+                color: darken( #C7A17A, 20%);
             }
         }
+        &__tel,
+        &__adress{
+            @include text(17px, 400, #fff);
+        }
+
+        &__tel a{
+            color: #C7A17A;
+             &:hover {
+            color: darken( #C7A17A, 10%);
+            }
+            &:active {
+                color: darken( #C7A17A, 20%);
+            }
+        }
+      
     }
 
 </style>

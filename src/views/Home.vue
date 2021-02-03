@@ -65,6 +65,7 @@ export default {
 	text-align: center;
 	width: 70%;
     &__decor{
+		background-color: aliceblue;
         width: 30%;
         max-width: 400px;
         flex: 1;

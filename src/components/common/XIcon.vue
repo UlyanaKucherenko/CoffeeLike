@@ -19,6 +19,7 @@ export default {
         [getName('linkedin')]: () => import('../icons/IconLinkedin.vue'),
         [getName('twitter')]: () => import('../icons/IconTwitter.vue'),
         [getName('stars')]: () => import('../icons/IconStars.vue'),
+        [getName('pin')]: () => import('../icons/IconPin.vue'),
 
     },
     computed: {

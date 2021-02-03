@@ -26,14 +26,13 @@ export default {
         position: relative;
         height: 100vh;
        
-         &__container {
-         display: flex;
+        &__container {
+        display: flex;
         justify-content: stretch;
         align-items: stretch;
         flex:1;
         min-height: 100vh;
         
-        //padding: 0px 0px 0 30px;
       }
 
 
@@ -44,7 +43,6 @@ export default {
         height: 100vh;
         overflow-y: scroll;
         padding-right: 280px;
-        
       }
 
       &__right-nav{

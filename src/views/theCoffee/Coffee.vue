@@ -138,6 +138,7 @@ export default {
         ...mapActions('favoriteCoffee', ['addItemToCart']),
         selectFavorite(card) {
             this.addItemToCart(card);
+            console.log(card);
         },
 
         async searchByName() {
@@ -216,11 +217,11 @@ export default {
         flex: 1;
         width: 70%;
         @include flex(flex-start,center,column);
-        padding-top: 50px;
+       padding: 30px 20px 0;
+        
 
         &__container {
-            padding-top:30px ;
-            padding-right: 20px;
+            //padding: 30px 20px 0;
             position: relative;
             flex: 1;
             width: 100%;
