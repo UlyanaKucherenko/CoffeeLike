@@ -1,5 +1,5 @@
 const state = () => ({
-    favoriteCart: [],
+    favoriteCart: [1,2],
 });
 
 const  mutations ={

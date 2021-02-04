@@ -64,11 +64,13 @@
 
 <script>
 import { mapState } from 'vuex';
+
+
 export default {
     name: 'SideBar',
     data() {
         return {
-             routes: [
+            routes: [
                  {
                      path:'/',
                      name:'Home',
@@ -81,10 +83,14 @@ export default {
                  },
                  
              ],
-              visible: false,
+            visible: false,
+            drinks:[],
         }
     },
     methods:{
+        showDrinks() {
+            console.log( this.drinks);
+        },
         handleClick() {
             this.visible = true;
         },
@@ -98,11 +104,17 @@ export default {
         ...mapState("shopCart",["cart"]),
         ...mapState("favoriteCoffee",["favoriteCart"]),
         ...mapState('allDrinks', ['allDrinks']),
+        
     },
      mounted() {  
         console.log(this.favoriteCart);
+       
      },
-   
+     async created(){
+        this.drinks=this.allDrinks;
+        this.showDrinks();
+     }
+
 }
 </script>
 

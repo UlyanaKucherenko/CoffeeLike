@@ -25,7 +25,7 @@ export default {
   name: 'Home', 
   data() {
     return {
-	dotPosition: 'top', 
+	
     };
   },
   methods:{
@@ -65,7 +65,7 @@ export default {
 	text-align: center;
 	width: 70%;
     &__decor{
-		background-color: aliceblue;
+		background-color: #fff;
         width: 30%;
         max-width: 400px;
         flex: 1;
@@ -104,11 +104,8 @@ export default {
 		position: absolute;
 		bottom:80px;
 		left: 105px;
+		@include text($title-size, 900, #415167);
 		font-family: Montserrat;
-		font-style: normal;
-		font-weight: 900;
-		font-size: $title-size;
-		color: #415167;
 		z-index: 2;
 
 		span {

@@ -118,7 +118,7 @@ export default {
     methods: {
 
         inputSearch(){
-        this.searchByName();
+            this.searchByName();
         },
 
         changeCategory(value) {
@@ -193,6 +193,7 @@ export default {
             //console.log('btn-dateil', item);
             this.visible = true;
         },
+
         hideModal() {
             this.visible = false;
         },
@@ -217,11 +218,9 @@ export default {
         flex: 1;
         width: 70%;
         @include flex(flex-start,center,column);
-       padding: 30px 20px 0;
+        padding: 30px 20px 0;
         
-
         &__container {
-            //padding: 30px 20px 0;
             position: relative;
             flex: 1;
             width: 100%;
@@ -235,11 +234,7 @@ export default {
 
         &__title {
             font-family: Montserrat;
-            font-style: normal;
-            font-weight: 900;
-            font-size: 35px;
-            line-height: 34px;
-            color: #415167;
+            @include text(35px, 900, #415167);
             text-transform: uppercase;
             margin-bottom: 55px;
         }
@@ -283,7 +278,6 @@ export default {
             color:white;
             cursor: pointer;
         }
-
 
         &__filter-wrap {
             @include flex(flex-end,center,row);

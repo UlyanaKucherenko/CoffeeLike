@@ -2,15 +2,16 @@
     <div class="shop-cart">
         <h1 class="shop-cart__title">Shopping Cart</h1>
         <div class="shop-cart__main">
-            <ul class="shop-cart__list">
-                <li class="shop-cart__item-list" v-for="item in productShopList" :key="item.name">
-                    <a-avatar class="shop-cart__item-img" :src="item.img" />
-                    <span class="shop-cart__item-name">{{item.name}}</span>
-                    <span class="shop-cart__item-size">{{item.size}}</span>
-                    <span class="shop-cart__item-count">{{item.count}}</span>
-                    <span class="shop-cart__item-price">{{item.price}}$</span>
-                </li>
-            </ul>
+            <table class="shop-cart__list">
+                 <tr class="shop-cart__item-list" v-for="item in productShopList" :key="item.name">
+                    <td><a-avatar class="shop-cart__item-img" :src="item.img" /></td>
+                    <td class="shop-cart__item-name">{{item.name}}</td>
+                    <td class="shop-cart__item-size">{{item.size}}</td>
+                    <td class="shop-cart__item-count">{{item.count}}</td>
+                    <td class="shop-cart__item-price">{{item.price}}$</td>
+                    <td>delete</td>
+                </tr>
+            </table>
              <button>clear</button>
             <button>make an order</button>
         </div>
@@ -47,16 +48,11 @@ export default {
         flex: 1;
         width: 70%;
         @include flex(flex-start,center,column);
-        padding-top: 50px;
-        padding: 50px 15px 0;
+        padding: 30px 15px 0;
 
     &__title {
+        @include text(35px, 900,#415167);
         font-family: Montserrat;
-        font-style: normal;
-        font-weight: 900;
-        font-size: 35px;
-        line-height: 34px;
-        color: #415167;
         text-transform: uppercase;
         margin-bottom: 55px;
     }
@@ -67,7 +63,10 @@ export default {
         padding: 20px 0 0;
     }
     &__list {
-       
+        font-size: 14px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        text-align: center;
     }
 
     &__item-list {
@@ -76,10 +75,12 @@ export default {
         @include flex(flex-start,center,row);
         border-bottom: 1px solid rgb(192, 190, 190);
     }
-
-    &__item-img{
-        margin-right: 20px;
+    & td {
+       
+         width: 150px;
     }
+
+   
     
     }
 </style>
