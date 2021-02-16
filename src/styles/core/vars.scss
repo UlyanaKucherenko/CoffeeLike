@@ -46,8 +46,8 @@ $black:#000000;
   @return #{$remSize}rem;
 }
 
-$title-size: calcRem(70px);
+$title-size: calcRem(60px);
 $menu-size: calcRem(48px);
 $big-size: calcRem(36px);
 $small-size: calcRem(24px);
-$small-size-mobile: calcRem(20px);
+$small-size-mobile: calcRem(18px);

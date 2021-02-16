@@ -43,10 +43,13 @@ export default {
         height: 100vh;
         overflow-y: scroll;
         padding-right: 280px;
+         @include media($screen: $screen-tablet-large){
+            padding-right: 13%;
+        }
       }
 
       &__right-nav{
-        width: 30%;
+        width: 32%;
         background-color: #3b3c3d;
         flex: 1;
         display: flex;
@@ -57,6 +60,9 @@ export default {
         right: 0;
         height: 100%;
         padding-top: 30px;
+        @include media($screen: $screen-tablet-large){
+            width: 14%;
+        }
         
       }
     }

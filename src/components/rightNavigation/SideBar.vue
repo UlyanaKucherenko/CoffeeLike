@@ -127,6 +127,7 @@ export default {
     }
 
     .side-bar {
+
          &__user-btn {
             width: 100%;
             @include flex($justify-content: space-between, $align-items: center, $direction: row, $wrap: wrap);
@@ -135,12 +136,22 @@ export default {
             margin-bottom: 40px;
 
             @include media($screen: $screen-tablet-large){
-                @include flex($justify-content: space-between, $align-items: center, $direction: column, $wrap: wrap);
+                @include flex( center, center,  column);
+                margin-bottom: 30px;
 
+            }
+
+        }
+        &__user-btn-profil {
+            @include media($screen: $screen-tablet-large){
+             margin-bottom: 30px;
             }
         }
         &__user-name {
             margin-left: 5px;
+            @include media($screen: $screen-tablet-large){
+            display: none;
+            }
         }
 
         &__favorete-btn {
@@ -166,34 +177,35 @@ export default {
             font-family: Nunito;
             font-style: normal;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 20px;
             color: #F9F5E8;
             text-transform: uppercase;
-            background-color: #C7A17A;
+            //background-color: #C7A17A;
             border-radius: 19px;
             border: none;
             outline: none;
             @include flex(flex-start,center);
             min-height: 50px;
-            padding: 0 24px;
+            //padding: 0 24px;
             cursor: pointer;
             transition: all 0.3s ease-out;
                 
              &:hover {
-            background-color: darken( #C7A17A, 10%);
-            color: #F9F5E8;
+           // background-color: darken( #C7A17A, 10%);
+            color: darken( #C7A17A, 10%);
 ;
             }
             &:active {
-                background-color: darken( #C7A17A, 20%);
-                color: #F9F5E8;
+                //background-color: darken( #C7A17A, 20%);
+                color: darken( #C7A17A, 20%);
             }
             &._active {
-                background-color: darken( #C7A17A, 20%);
+               // background-color: darken( #C7A17A, 20%);
+                color: darken( #C7A17A, 20%);
             }
             @include media($screen: $screen-tablet-large){
                  @include flex(center,center);
-                 padding: 0 15px;
+               //  padding: 0 15px;
             }
         }
         &__item-text {

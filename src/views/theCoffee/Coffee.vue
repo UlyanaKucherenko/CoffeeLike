@@ -6,17 +6,14 @@
                 <!-- Search Filter-->
                  <div class="coffee__search-wrap">
                      <div class="coffee__search">
-                         <input class="coffee__input-search" v-model="textSearch" placeholder="Search by name...">
+                        <input class="coffee__input-search" v-model="textSearch" placeholder="Search by name...">
                         <button class="coffee__button-search" @click="inputSearch()"><a-icon type="search" /></button>
                      </div>
                      <div class="coffee__filter-wrap">
                         <a-select class="coffee__select"
                             ref="categoriesRef"
-                            allowClear
-                            style=""
                             @change="changeCategory"
                             :placeholder="selectedCategories">
-
                             <a-select-option class="coffee__select-option"
                             v-for="category in categories" :key="category"
                             :value="category">
@@ -116,7 +113,6 @@ export default {
     },
 
     methods: {
-
         inputSearch(){
             this.searchByName();
         },
