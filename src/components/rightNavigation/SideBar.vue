@@ -20,8 +20,8 @@
                 <span class="side-bar__user-name">Ulya</span>
 			</div>
             <div class="side-bar__favorete-btn" @click="handleClick">
-                <a-badge :count="favoriteDrinks.length" :offset="[5,0]" :number-style="{ backgroundColor: '#52c41a' }">
-                    <a-icon type="star" :style="{ fontSize: '25px' }"/>
+                <a-badge :count="favoriteDrinks.length" :offset="[-25,-2]" :number-style="{ backgroundColor: '#52c41a' }">
+                    <a-icon class="side-bar__item-icon" type="star" />
                 </a-badge>
             </div>
 		</div>
@@ -29,20 +29,20 @@
         <ul  class="side-bar__list">
             <li class="side-bar__item" v-for="route in routes" :key="route.name">
                 <router-link :to="route.path" exact active-class="_active" class="side-bar__item-link">
-                    <a-icon :type="route.icon" /> <span class="side-bar__item-text">{{route.name}}</span>
+                    <a-icon class="side-bar__item-icon" :type="route.icon" /> <span class="side-bar__item-text">{{route.name}}</span>
                 </router-link>
             </li>
             <li class="side-bar__item">
                 <router-link to="/shopping-cart" exact active-class="_active" class="side-bar__item-link">
-                    <a-badge :count="cart.length" :offset="[5,0]">
-                        <a-icon type="shopping-cart" :style="{ fontSize: '20px' }"/>
+                    <a-badge :count="cart.length" :offset="[-25,-2]">
+                        <a-icon class="side-bar__item-icon" type="shopping-cart" />
                     </a-badge>
                    <span class="side-bar__item-text"> shopping cart</span>
                 </router-link>
             </li>
             <li class="side-bar__item">
                 <router-link to="/contacts" exact active-class="_active" class="side-bar__item-link">
-                    <a-icon type="environment" />
+                    <a-icon class="side-bar__item-icon" type="environment" />
                     <span class="side-bar__item-text">Contacts</span>
                 </router-link>
             </li>
@@ -183,38 +183,38 @@ export default {
             font-size: 20px;
             color: #F9F5E8;
             text-transform: uppercase;
-            //background-color: #C7A17A;
             border-radius: 19px;
             border: none;
             outline: none;
             @include flex(flex-start,center);
             min-height: 50px;
-            //padding: 0 24px;
             cursor: pointer;
             transition: all 0.3s ease-out;
                 
              &:hover {
-           // background-color: darken( #C7A17A, 10%);
             color: darken( #C7A17A, 10%);
-;
             }
             &:active {
-                //background-color: darken( #C7A17A, 20%);
                 color: darken( #C7A17A, 20%);
             }
             &._active {
-               // background-color: darken( #C7A17A, 20%);
                 color: darken( #C7A17A, 20%);
             }
             @include media($screen: $screen-tablet-large){
                  @include flex(center,center);
-               //  padding: 0 15px;
             }
         }
         &__item-text {
             margin-left: 20px;
             @include media($screen: $screen-tablet-large){
                 display: none;
+            }
+        }
+
+        &__item-icon{
+             font-size: 20px;
+             @include media($screen: $screen-tablet-large){
+                font-size: 36px;
             }
         }
     }

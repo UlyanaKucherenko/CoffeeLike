@@ -48,7 +48,6 @@ export default {
         width: 70%;
         height: 100%;
         position: relative;
-        z-index: 1;
         
         &:before {
         content: "";
@@ -84,26 +83,45 @@ export default {
 
         &__main {
             background-color: rgba(#575b61,0.8);
-            width: 70%;
+            width: 80%;
             @include flex(center,center,row);
             position: relative;
             padding: 10px;
+
+            @include media($screen: $screen-tablet-large){
+                 @include flex(center,center,column);
+                 width: 90%;
+            }
         }
 
         &__map-wrap{
             width: 50%;
             position: relative;
             background-color:#777d86;
+            font-size: 0;
+            @include media($screen: $screen-tablet-large){
+                width: 90%;
+            }
         }
         &__map{
             width: 100%;
+            height:300px;
+             @include media($screen: $screen-tablet-large){
+                height:200px;
+            }
         }
 
         &__info{
             width:50%;
-            @include flex(center,flex-start,column);
-            text-align: left;
+            @include flex(center,center,column);
+            text-align: center;
+            padding-right: 10px;
             @include text(17px, 400, #fff);
+             @include media($screen: $screen-tablet-large){
+                width:90%;
+                margin-bottom: 20px;
+            }
+            
         }
 
         &__social-links {
@@ -141,6 +159,9 @@ export default {
             &:active {
                 color: darken( #C7A17A, 20%);
             }
+        }
+         &__adress{
+           margin-bottom: 0;
         }
       
     }

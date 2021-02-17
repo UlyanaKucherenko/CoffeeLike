@@ -196,7 +196,6 @@ export default {
         },
 
         showFormOder(item) {
-            //console.log('btn-dateil', item);
             this.visible = true;
             this.currentItem = item;
         },
@@ -288,7 +287,7 @@ export default {
             width: 100%;
             padding: 0 15px;
             @include flex(center,center,row);
-            min-height: 50px;
+            min-height: 40px;
             border: 1px solid  rgb(192, 190, 190);
             overflow: hidden;
             outline: none;
@@ -297,7 +296,7 @@ export default {
         &__button-search {
             padding: 0 24px;
             @include flex(center,center,row);
-            min-height: 50px;
+            min-height: 40px;
             border: none;
             background-color: #415167;
             color:white;
@@ -309,7 +308,7 @@ export default {
         }
 
         &__select {
-            width: 300px;
+            width: 200px;
         }
 
         &__spiner {
@@ -318,19 +317,25 @@ export default {
         }
         &__main-content {
             width: 100%;
-            padding: 0 15px;
+            padding: 0 15px 0 0;
         }
 
         &__products {
             @include flex(space-between, stretch,  row,  wrap);
+            @include media($screen: 860px){ 	
+             @include flex(space-around, stretch,  row,  wrap);
+            }
         }
 
         &__product {
             flex: 1 1 24%;
-            max-width: 24%;
-            margin:5px 5px 10px 0px;
+            width: 24%;
+            max-width: 260px;
+            min-height: 300px;
+            margin:5px 5px 15px 0px;
             box-shadow: 0 14px 28px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.1);
             border: 1px solid rgba(182, 180, 180, 0.5);
+            margin-right: 10px;
             
 
             &:hover {
@@ -338,8 +343,16 @@ export default {
                 transition: 0.5s;
             }
 
-            &:nth-child(4n+4) {
+            /*&:nth-child(4n+4) {
                 margin-right: 0;
+            }*/
+
+            @include media($screen: 960px){ 	
+               flex: 1 1 49%;
+                width: 49%;
+            }
+            @include media($screen: 860px){ 	
+              max-width: 300px;
             }
         }
 

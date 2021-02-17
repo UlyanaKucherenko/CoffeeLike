@@ -49,7 +49,7 @@ export default {
       }
 
       &__right-nav{
-        width: 32%;
+        width: 30%;
         background-color: #3b3c3d;
         flex: 1;
         display: flex;

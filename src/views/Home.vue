@@ -2,7 +2,7 @@
   <div class="home">
 	<div  class="home__logo">
 		<router-link to="/" class="home__logo-link">
-			CoffeeLike
+			CoffeeLike  <a-icon type="coffee" />
 		</router-link>
 	</div>
 	<h1 class="home__title">
@@ -76,16 +76,16 @@ export default {
 		width: 90%;
     }
 	
-
 	&__logo-link {
 		display: inline-block;
 		position: absolute;
 		z-index: 2;
 		top:30px;
 		left: 20px;
-		@include text(30px, 700, rgb(24, 23, 23));
+		font-style: italic;
+		@include text(32px, 600, rgb(24, 23, 23));
 		@include media($screen: $screen-tablet-large){
-           @include text(30px, 700, #fff);
+           @include text(32px, 600, #fff);
         }
 	}
 
