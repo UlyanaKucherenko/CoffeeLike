@@ -41,7 +41,7 @@
                             </p>
 
                             <div class="coffee__product-btns">
-                                <the-button class="coffee__product-btn" type="addCart" @click="showFormOder(item.id)">
+                                <the-button class="coffee__product-btn" type="addCart" @click="showFormOder(item)">
                                     Add <a-icon type="shopping-cart" class="" />
                                 </the-button>   
                             </div>
@@ -71,29 +71,28 @@
             </div> 
         </div>
        
-        <!-- Modal add-->
-       <the-modal
-        :visible="visible"
-        @handle-cancel="hideModal"
-        @handle-ok="hideModal">
-           
-        </the-modal>  
+        <!-- Modal add card-->
+        <modal-add-card 
+        :currentItem="currentItem" 
+        :handleCancel="handleCancel" 
+        :visible="visible"></modal-add-card>
     </div>
 </template>
 
 <script>
 
 import {firestore} from '../../firebase/firebase.utils.js'
-import TheModal from '../../components/common/TheModal.vue'
-import { mapActions, mapState} from 'vuex'
+import { mapActions, mapState, mapMutations} from 'vuex'
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import { getDrinks } from "../../utils"
+import ModalAddCard from "../../components/modals/ModalAddCard.vue"
 
 export default {
 
     name: 'Coffee',
     components: {
-    TheModal,
     PulseLoader,
+    ModalAddCard
     },
     data() {
         return {
@@ -109,6 +108,8 @@ export default {
                 "Author's teas",
             ],
             selectedCategories:'all drinks',
+            favoriteDrinks: [],
+            currentItem:{},
         }
     },
 
@@ -131,10 +132,19 @@ export default {
             }
         },
 
-        ...mapActions('favoriteCoffee', ['addItemToCart']),
-        selectFavorite(card) {
-            this.addItemToCart(card);
-            console.log(card);
+        ...mapActions('allDrinks', ['addItemToAllDrinks']),
+        ...mapMutations('favoriteCoffee', ['changeFavoriteState']),
+        selectFavorite(id) {
+            if (this.favoriteDrinks.includes(id)) {
+                this.favoriteDrinks = this.favoriteDrinks.filter(item => item !== id)
+                console.log('this.favoriteDrinks delete', this.favoriteDrinks)
+                this.changeFavoriteState(this.favoriteDrinks)
+            } else {
+                this.favoriteDrinks.push(id);
+                this.changeFavoriteState(this.favoriteDrinks)
+                console.log('this.favoriteDrinks add', this.favoriteDrinks)
+            }
+            localStorage.setItem("favoriteDrinks", JSON.stringify(this.favoriteDrinks))  
         },
 
         async searchByName() {
@@ -185,12 +195,22 @@ export default {
             }
         },
 
-        showFormOder() {
+        showFormOder(item) {
             //console.log('btn-dateil', item);
             this.visible = true;
+            this.currentItem = item;
         },
 
         hideModal() {
+            this.visible = false;
+        },
+
+        showModal(item) {
+            this.visible = true;
+            this.currentItem = item;
+            },
+        handleCancel() {
+            console.log('Clicked cancel button');
             this.visible = false;
         },
     },
@@ -200,7 +220,16 @@ export default {
     },
 
     async created() {
-        this.coffee = this.allDrinks;
+       if (this.allDrinks.length === 0) {
+			const dataDrinks = await getDrinks();
+			dataDrinks.forEach(item =>{
+				this.addItemToAllDrinks(item);
+			});
+            this.coffee = this.allDrinks;
+		} 
+        else {
+            this.coffee = this.allDrinks;
+        }
     },
     
 }

@@ -19,9 +19,10 @@
 </template>
 
 <script>
-import {firestore} from '../firebase/firebase.utils.js'
+
 import TheSlider from "../components/TheSlider.vue"
-import {mapActions} from 'vuex'
+import {mapState, mapActions} from 'vuex'
+import { getDrinks } from "../utils"
 export default {
   name: 'Home',
   components:{
@@ -32,30 +33,24 @@ export default {
 	
     };
   },
+
+  computed: {
+		...mapState("allDrinks", ["allDrinks"]),
+		...mapState("favoriteCoffee", ["favoriteDrinks"])
+	},
+
   methods:{
-	async getAllDrinks() {
-            try {
-                const res = firestore.collection(`coffee`);
-				const parsedRes = await res.get();
-				let getData =[];
-                parsedRes.forEach(function(item) {
-                    getData.push( item.data());
-                });
-                return getData;
-			} 
-			catch (error) {
-				console.log(error)
-            }
-		},
 		
 		...mapActions('allDrinks', ['addItemToAllDrinks']),
   },
 
     async created() {
-		const dataDrinks = await this.getAllDrinks();
-		dataDrinks.forEach(item =>{
-			this.addItemToAllDrinks(item);
-		});
+		if (this.allDrinks.length === 0) {
+			const dataDrinks = await getDrinks();
+			dataDrinks.forEach(item =>{
+				this.addItemToAllDrinks(item);
+			});
+		}
     },
 
 }

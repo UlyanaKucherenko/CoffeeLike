@@ -1,21 +1,15 @@
 const state = () => ({
-    favoriteCart: [1,2],
+    favoriteDrinks: [],
 });
 
-const  mutations ={
-    changeFavoriteCartState(state, payload) {
-        state.favoriteCart = [...state.favoriteCart, payload];
+const mutations ={
+    changeFavoriteState(state, payload) {
+        state.favoriteDrinks = [...payload];
     },
 };
-const  actions = {
-    addItemToCart: async ({commit}, payload) =>{
-        commit("changeFavoriteCartState", payload);
-    },
-};
+
 export default {
     namespaced: true,
     state,
-    mutations, 
-    actions,
-    
+    mutations
 };

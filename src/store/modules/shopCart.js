@@ -1,21 +1,28 @@
 const state = () => ({
-    cart: [1,2],
+    cart: [
+        /*{
+            name:"latte",
+            price:"2"
+        }
+        ,{
+            name:"capuchimo",
+            price:"3"
+        }*/
+    ]
 });
 
 const  mutations ={
     changeCartState(state, payload) {
-        state.cart = [...state.cart, payload];
+        state.cart = [...state.cart,payload];
     },
 };
-const  actions = {
-    addItemToCart: async ({commit}, payload) =>{
-        commit("changeCartState", payload);
-    },
-};
+
 export default {
     namespaced: true,
     state,
-    mutations, 
-    actions,
+    mutations
     
 };
+
+
+

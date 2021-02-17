@@ -20,7 +20,7 @@
                 <span class="side-bar__user-name">Ulya</span>
 			</div>
             <div class="side-bar__favorete-btn" @click="handleClick">
-                <a-badge :count="favoriteCart.length" :offset="[5,0]" :number-style="{ backgroundColor: '#52c41a' }">
+                <a-badge :count="favoriteDrinks.length" :offset="[5,0]" :number-style="{ backgroundColor: '#52c41a' }">
                     <a-icon type="star" :style="{ fontSize: '25px' }"/>
                 </a-badge>
             </div>
@@ -50,9 +50,8 @@
 
         <a-modal v-model="visible" title="favoriteCart Modal" @ok="handleOk">
         <ul>
-            <li v-for="item in favoriteCart" :key="item.id">
-                 <a-avatar shape="square" :size="35" icon="user" />
-                {{item.id}} 
+            <li v-for="item in favoriteDrinksWithDescription" :key="item.id">
+                <a-avatar :src="item.picture" style="width: 50px; height: 50px;" />
                 {{item.name}}
             </li>
         </ul>
@@ -63,7 +62,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
+import { favouriteCoffeeArray } from "../../utils"
 
 
 export default {
@@ -84,35 +84,38 @@ export default {
                  
              ],
             visible: false,
-            drinks:[],
+            favoriteDrinksWithDescription: []
         }
     },
     methods:{
-        showDrinks() {
-            console.log( this.drinks);
-        },
+
         handleClick() {
             this.visible = true;
+            const dataForModal = this.allDrinks.filter(item => this.favoriteDrinks.includes(item.id))
+            console.log("dataForModal", dataForModal);
+            this.favoriteDrinksWithDescription = dataForModal;
         },
-        handleOk(e) {
+         handleOk(e) {
             console.log(e);
             this.visible = false;
         },
+        ...mapMutations("favoriteCoffee", ["changeFavoriteState"])
 
     },
     computed: {
-        ...mapState("shopCart",["cart"]),
-        ...mapState("favoriteCoffee",["favoriteCart"]),
+       ...mapState("shopCart", ["cart"]),
+        ...mapState("favoriteCoffee", ["favoriteDrinks"]),
         ...mapState('allDrinks', ['allDrinks']),
         
     },
-     mounted() {  
-        console.log(this.favoriteCart);
-       
-     },
+    
      async created(){
-        this.drinks=this.allDrinks;
-        this.showDrinks();
+        const data = favouriteCoffeeArray;
+        if (data) {
+            this.changeFavoriteState(data);
+        } else {
+            this.changeFavoriteState([]);
+        }
      }
 
 }
