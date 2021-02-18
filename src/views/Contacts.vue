@@ -1,8 +1,10 @@
 <template>
     <div class="contacts">   
         <div class="contacts__container">
-            <x-icon icon=pin class="contacts__title-icon"/>
-            <h3 class="contacts__title">our contacts</h3>
+            <div>
+                <x-icon icon=pin class="contacts__title-icon"/>
+                <h3 class="contacts__title">our contacts</h3>
+            </div>
             <div class="contacts__main">
                 <div class="contacts__info">
                     <ul class="contacts__social-links">
@@ -26,6 +28,13 @@
                         src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4946.718475041292!2d19.99624863863642!3d50.07540269832203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2sua!4v1612366491659!5m2!1sru!2sua" width="400" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                 </div>
             </div>
+            <div class="contacts__footer">
+                 <router-link to="/" class="contacts__logo">
+                    CoffeeLike  <a-icon type="coffee" />
+                </router-link>
+                <span>&copy;2021</span>
+            </div>
+            
         </div>
     </div>
 </template>
@@ -57,17 +66,17 @@ export default {
         right: 0;
         bottom: 0;
         display: block;
-        background: url("../assets/img/our-contact.jpg") no-repeat center;
+        background: url("../assets/img/coffee-car.jpg") no-repeat center;
         background-size: cover;
         z-index: 0;
         }
 
         &__container{
             position: relative;
-            @include flex(flex-start,center,column);
-            padding: 30px 0px 0px;
+            @include flex(space-between,center,column);
+            padding: 30px 0px;
             height: 100%;
-            background-color: rgba(#777d86,0.5);
+            background-color: rgba(#777d86,0.4);
         }
 
         &__title-icon{
@@ -78,7 +87,7 @@ export default {
             @include text(35px, 900, #fff);
             font-family: Montserrat;
             text-transform: uppercase;
-            margin-bottom: 60px;
+            margin-bottom: 0px;
         }
 
         &__main {
@@ -163,7 +172,22 @@ export default {
          &__adress{
            margin-bottom: 0;
         }
-      
+
+        &__footer{
+            min-height: 50px;
+            @include flex(center,center,row);
+            @include text(18px, 400, #fff);
+        }
+
+         &__logo{
+            font-style: italic;
+            @include text(18px, 600, #fff);
+            cursor: pointer;
+            margin-right: 30px;
+            &:hover{
+                color:#C7A17A;
+            }
+         }
     }
 
 </style>

@@ -43,8 +43,8 @@ export default {
         height: 100vh;
         overflow-y: scroll;
         padding-right: 280px;
-         @include media($screen: $screen-tablet-large){
-            padding-right: 13%;
+        @include media($screen: $screen-tablet-large){
+            padding-right: 14%;
         }
       }
 

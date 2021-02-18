@@ -45,7 +45,7 @@ export default {
         height: 46px;
         padding: 0 24px;
         cursor: pointer;
-        transition:  background-color .2s ease;
+        transition:.2s ease;
 
         &.addCart {
             background-color: rgb(38, 126, 38);
@@ -59,14 +59,22 @@ export default {
         }
 
           &.detail {
-            background-color: #20141979;
+            background-color: #306d3ef8;
+            border:2px solid #306d3ef8;
             border-radius: 0px;
+            max-width: 150px;
+            width: 100%;
+            text-transform: uppercase;
+            color: #fff;
+            font-weight: 600px;
+            transition: all 0.5s ease-out;
             
              &:hover {
-            background-color: lighten(#eb6a6a, 10%);
+                border:2px solid #fff;
+                background-color: rgba(#000, 0.3);
             }
             &:active {
-                background-color: darken(#eb6a6a, 10%);
+              background-color: rgba(#000, 0.6);
             }
         } 
 

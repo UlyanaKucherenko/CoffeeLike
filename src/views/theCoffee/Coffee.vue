@@ -270,33 +270,39 @@ export default {
         }
 
          &__search-wrap {
-            @include flex(space-between,center,row);
+            @include flex(center,center,row);
             margin-bottom: 30px;
             border-bottom: 1px solid rgb(192, 190, 190);
             padding-bottom: 20px;
+            @include media($screen: 760px){ 	
+             @include flex(center,center,column);
             }
+        }
 
          &__search{
             @include flex(flex-start,center,row);
-             width: 50%;
-
+             margin-right: 60px;
+            @include media($screen: 760px){ 	
+                margin-right: 0;
+                margin-bottom: 20px;
             }
+        }
 
         &__input-search {
             max-width: 300px;
             width: 100%;
             padding: 0 15px;
             @include flex(center,center,row);
-            min-height: 40px;
+            min-height: 35px;
             border: 1px solid  rgb(192, 190, 190);
             overflow: hidden;
             outline: none;
-            @include text(18px,400, #5c5959);
+            @include text(15px,400, #5c5959);
         }
         &__button-search {
             padding: 0 24px;
             @include flex(center,center,row);
-            min-height: 40px;
+            min-height: 35px;
             border: none;
             background-color: #415167;
             color:white;
@@ -308,7 +314,7 @@ export default {
         }
 
         &__select {
-            width: 200px;
+            width: 250px;
         }
 
         &__spiner {
@@ -317,7 +323,7 @@ export default {
         }
         &__main-content {
             width: 100%;
-            padding: 0 15px 0 0;
+            //padding: 0 15px 0 0;
         }
 
         &__products {
@@ -348,11 +354,14 @@ export default {
             }*/
 
             @include media($screen: 960px){ 	
-               flex: 1 1 49%;
-                width: 49%;
+                flex: 1 1 47%;
+                width: 47%;
             }
             @include media($screen: 860px){ 	
-              max-width: 300px;
+                max-width: 300px;
+                flex: 1 1 80%;
+                width: 80%;
+                margin-right: 0;
             }
         }
 
