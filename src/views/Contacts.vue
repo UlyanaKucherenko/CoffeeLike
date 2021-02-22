@@ -80,7 +80,7 @@ export default {
         }
 
         &__title-icon{
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         &__title {
@@ -137,6 +137,7 @@ export default {
              @include flex(center,center,row);
              font-size: 45px;
              width: 100%;
+             margin-bottom: 10px;
         }
 
          &__social-links-item {
@@ -174,7 +175,7 @@ export default {
         }
 
         &__footer{
-            min-height: 50px;
+            min-height: 40px;
             @include flex(center,center,row);
             @include text(18px, 400, #fff);
         }

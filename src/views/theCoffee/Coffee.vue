@@ -32,7 +32,7 @@
                             <img :src=item.picture />
                         </div>
                         <div class="coffee__product-info" >
-                            <a-button class="coffee__star-favorite" @click="selectFavorite(item.id)" type="primary" shape="circle" icon="star" />
+                            <a-button class="coffee__star-favorite" :class="{activeFavorite}" @click="selectFavorite(item.id)" type="primary" shape="circle" icon="star" />
                                 
                             <p class="coffee__product-price">{{item.prices.small}} $</p>
                             <h4 class="coffee__product-title">{{item.name}}</h4>
@@ -101,6 +101,7 @@ export default {
             textSearch: '',
             loading: false,
             colorSpiner: ' green',
+            activeFavorite: false,
             categories: [
                 "all drinks",
                 "cocktail",
@@ -120,11 +121,9 @@ export default {
 
         changeCategory(value) {
             this.selectedCategories = value;
-            //console.log('value', value);
             this.loading = true;
 
             if(this.selectedCategories === 'all drinks'){
-                //console.log('all drinks');
             this.getCategoryAllDrinks(); 
             }
             else {
@@ -134,17 +133,25 @@ export default {
 
         ...mapActions('allDrinks', ['addItemToAllDrinks']),
         ...mapMutations('favoriteCoffee', ['changeFavoriteState']),
+
         selectFavorite(id) {
+            const AllBtn = document.querySelectorAll(".coffee__star-favorite");
+            console.log("AllBtn",AllBtn);
+
             if (this.favoriteDrinks.includes(id)) {
                 this.favoriteDrinks = this.favoriteDrinks.filter(item => item !== id)
-                console.log('this.favoriteDrinks delete', this.favoriteDrinks)
-                this.changeFavoriteState(this.favoriteDrinks)
+                console.log('this.favoriteDrinks delete', this.favoriteDrinks);
+                this.changeFavoriteState(this.favoriteDrinks);
+                 AllBtn.style.backgroundColor="";
+              
             } else {
                 this.favoriteDrinks.push(id);
-                this.changeFavoriteState(this.favoriteDrinks)
-                console.log('this.favoriteDrinks add', this.favoriteDrinks)
+                this.changeFavoriteState(this.favoriteDrinks);
+                console.log('this.favoriteDrinks add', this.favoriteDrinks);
+                  AllBtn.style.backgroundColor="red";
+                
             }
-            localStorage.setItem("favoriteDrinks", JSON.stringify(this.favoriteDrinks))  
+            localStorage.setItem("favoriteDrinks", JSON.stringify(this.favoriteDrinks)) ; 
         },
 
         async searchByName() {
@@ -236,6 +243,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 
     .coffee {
         text-align: center;
@@ -383,6 +391,11 @@ export default {
             background-color: #bb8855;
             border: 1px solid  #bb8855;
         }
+
+         .activeFavorite{
+            background-color: #415167;
+        }
+
         &__product-price{
             @include text(30px,600, #C7A17A);
             margin-bottom: 10px;
@@ -428,6 +441,8 @@ export default {
              @include flex(space-between, center,  row,  wrap);
         }
   }
-
+  .activeFavorite{
+            background-color: #415167;
+        }
    
 </style>

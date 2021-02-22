@@ -15,7 +15,7 @@ export default {
     props: {
         type: {
          validator(value){
-             return ['primary','addCart','detail','favorite'].indexOf(value) !== -1;
+             return ['primary','addCart','detail','favorite','clear', 'makeOder'].indexOf(value) !== -1;
          },
          default: "primary",
         },
@@ -87,6 +87,40 @@ export default {
             
         }
 
+         &.clear{
+            border-radius: 0px;
+            background-color: gainsboro;
+            text-transform: uppercase;
+            max-width: 150px;
+            width: 30%;
+            font-size: 14px;
+            transition: all 0.5s ease-out;
+
+            &:hover {
+            background-color: lighten(#C7A17A, 10%);
+            }
+            &:active {
+                background-color: darken(#C7A17A, 10%);
+            }
+        }
+
+         &.makeOder{
+            border-radius: 0px;
+            background-color: #306d3ef8;
+            text-transform: uppercase;
+            max-width: 200px;
+            width: 40%;
+            font-size: 14px;
+            transition: all 0.5s ease-out;
+
+            &:hover {
+            background-color: lighten(#306d3ef8, 10%);
+            }
+            &:active {
+                background-color: darken(#306d3ef8, 10%);
+            }
+        }
+
         &:hover {
             background-color: lighten(#C7A17A, 10%);
         }
@@ -97,5 +131,7 @@ export default {
         &__icon {
             margin-right: 10px;
         }
+
+       
     }
 </style>

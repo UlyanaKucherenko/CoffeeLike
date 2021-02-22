@@ -17,7 +17,10 @@ const getDrinks= async() =>{
 
 const favouriteCoffeeArray = JSON.parse(localStorage.getItem("favoriteDrinks"));
 
+const shopingListArray = JSON.parse(localStorage.getItem("shopCart"));
+
 export {
     getDrinks,
-    favouriteCoffeeArray
+    favouriteCoffeeArray,
+    shopingListArray
 }

@@ -26,14 +26,16 @@
             </div>
 		</div>
 
-        <ul  class="side-bar__list">
+        <ul class="side-bar__list">
+
             <li class="side-bar__item" v-for="route in routes" :key="route.name">
                 <router-link :to="route.path" exact active-class="_active" class="side-bar__item-link">
                     <a-icon class="side-bar__item-icon" :type="route.icon" /> <span class="side-bar__item-text">{{route.name}}</span>
                 </router-link>
             </li>
+            
             <li class="side-bar__item">
-                <router-link to="/shopping-cart" exact active-class="_active" class="side-bar__item-link">
+                <router-link to="/shopping-cart" exact active-class="_active" class="side-bar__item-link" @click="showShop">
                     <a-badge :count="cart.length" :offset="[-25,-2]">
                         <a-icon class="side-bar__item-icon" type="shopping-cart" />
                     </a-badge>
@@ -48,15 +50,18 @@
             </li>
         </ul>
 
-        <a-modal v-model="visible" title="favoriteCart Modal" @ok="handleOk">
-        <ul>
-            <li v-for="item in favoriteDrinksWithDescription" :key="item.id">
-                <a-avatar :src="item.picture" style="width: 50px; height: 50px;" />
-                {{item.name}}
-            </li>
-        </ul>
+    <a-modal v-model="visible" title="Favorite drinks" @ok="clearFavorite" :footer="null">
+
+         <table class="favorite__list">
+             <a-button @click="clearFavorite">clear</a-button>
+                 <tr class="favorite__item-list" v-for="item in favoriteDrinksWithDescription" :key="item.id">
+                    <td><a-avatar class="favorite__item-img" :src="item.picture" /></td>
+                    <td class="favorite__item-name">{{item.name}}</td>
+                    <td><a-button  icon="delete" @click="deleteItem(item.id)" /></td>
+                </tr>
+            </table>
         </a-modal>
-       
+
     </div>
     
 </template>
@@ -84,7 +89,7 @@ export default {
                  
              ],
             visible: false,
-            favoriteDrinksWithDescription: []
+            favoriteDrinksWithDescription: [],
         }
     },
     methods:{
@@ -95,15 +100,33 @@ export default {
             console.log("dataForModal", dataForModal);
             this.favoriteDrinksWithDescription = dataForModal;
         },
+
+        showShop(){
+            console.log("showShop");
+        },
          handleOk(e) {
             console.log(e);
             this.visible = false;
         },
-        ...mapMutations("favoriteCoffee", ["changeFavoriteState"])
+        ...mapMutations("favoriteCoffee", ["changeFavoriteState", "clearFavoriteState"]),
+
+        deleteItem(id){
+            console.log('ID', id);
+            this.favoriteDrinksWithDescription = this.favoriteDrinksWithDescription.filter(item => item.id !== id)
+            console.log('favoriteDrinksWithDescription', this.favoriteDrinksWithDescription);
+            this.changeFavoriteState(this.favoriteDrinksWithDescription);
+        },
+
+        clearFavorite() {
+            this.favoriteDrinksWithDescription=[];
+            this.changeFavoriteState(this.favoriteDrinksWithDescription);
+            localStorage.setItem("favoriteDrinks", JSON.stringify(this.favoriteDrinksWithDescription)) ; 
+            console.log("clearFavorite");
+        }
 
     },
     computed: {
-       ...mapState("shopCart", ["cart"]),
+        ...mapState("shopCart", ["cart"]),
         ...mapState("favoriteCoffee", ["favoriteDrinks"]),
         ...mapState('allDrinks', ['allDrinks']),
         
@@ -116,6 +139,9 @@ export default {
         } else {
             this.changeFavoriteState([]);
         }
+         
+        
+
      }
 
 }
@@ -129,8 +155,15 @@ export default {
     display: inline-block;
     }
 
-    .side-bar {
+    .favorite__list {
+            width: 100%;
+        }
+    .favorite__item-list {
+           height: 50px;
+    }
+  
 
+    .side-bar {
          &__user-btn {
             width: 100%;
             @include flex($justify-content: space-between, $align-items: center, $direction: row, $wrap: wrap);
@@ -217,5 +250,6 @@ export default {
                 font-size: 36px;
             }
         }
+
     }
 </style>
