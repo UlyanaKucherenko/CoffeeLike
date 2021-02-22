@@ -95,6 +95,7 @@ export default {
             width: 30%;
             font-size: 14px;
             transition: all 0.5s ease-out;
+            padding: 0 15px;
 
             &:hover {
             background-color: lighten(#C7A17A, 10%);
@@ -112,6 +113,7 @@ export default {
             width: 40%;
             font-size: 14px;
             transition: all 0.5s ease-out;
+            padding: 0 15px;
 
             &:hover {
             background-color: lighten(#306d3ef8, 10%);
