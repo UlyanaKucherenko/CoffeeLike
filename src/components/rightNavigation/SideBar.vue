@@ -53,7 +53,7 @@
     <a-modal v-model="visible" title="Favorite drinks" @ok="clearFavorite" :footer="null">
 
          <table class="favorite__list">
-             <a-button @click="clearFavorite">clear</a-button>
+             <a-button :class="isInBtnClearActive() ? 'activeClearBtn' : '' " @click="clearFavorite">clear</a-button>
                  <tr class="favorite__item-list" v-for="item in favoriteDrinksWithDescription" :key="item.id">
                     <td><a-avatar class="favorite__item-img" :src="item.picture" /></td>
                     <td class="favorite__item-name">{{item.name}}</td>
@@ -90,6 +90,7 @@ export default {
              ],
             visible: false,
             favoriteDrinksWithDescription: [],
+            activeBtn:false,
         }
     },
     methods:{
@@ -109,6 +110,16 @@ export default {
             this.visible = false;
         },
         ...mapMutations("favoriteCoffee", ["changeFavoriteState", "clearFavoriteState"]),
+
+        isInBtnClearActive(){
+             let isInActive = false;
+            if (this.favoriteDrinks >0) {
+                isInActive = false;
+            } else {
+                isInActive = true;
+            }
+            return isInActive;
+        },
 
         deleteItem(id){
             console.log('ID', id);
@@ -136,8 +147,10 @@ export default {
         const data = favouriteCoffeeArray;
         if (data) {
             this.changeFavoriteState(data);
+            this.activeBtn = true;
         } else {
             this.changeFavoriteState([]);
+            this.activeBtn = false;
         }
          
         
@@ -160,6 +173,10 @@ export default {
         }
     .favorite__item-list {
            height: 50px;
+    }
+
+    .activeClearBtn {
+        display:none;
     }
   
 

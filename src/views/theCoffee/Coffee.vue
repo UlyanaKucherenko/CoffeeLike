@@ -32,7 +32,7 @@
                             <img :src=item.picture />
                         </div>
                         <div class="coffee__product-info" >
-                            <a-button class="coffee__star-favorite" :class="{activeFavorite}" @click="selectFavorite(item.id)" type="primary" shape="circle" icon="star" />
+                            <a-button class="coffee__star-favorite"  :class="isInFavoriteList(item.id) ? 'favorite' : '' " @click="selectFavorite(item.id)" type="primary" shape="circle" icon="star" />
                                 
                             <p class="coffee__product-price">{{item.prices.small}} $</p>
                             <h4 class="coffee__product-title">{{item.name}}</h4>
@@ -133,6 +133,16 @@ export default {
 
         ...mapActions('allDrinks', ['addItemToAllDrinks']),
         ...mapMutations('favoriteCoffee', ['changeFavoriteState']),
+
+        isInFavoriteList(id) {
+            let isInFavorite = false;
+            if (this.favoriteDrinks.includes(id)) {
+                isInFavorite = false;
+            } else {
+                isInFavorite = true;
+            }
+            return isInFavorite;
+        },
 
         selectFavorite(id) {
             const AllBtn = document.querySelectorAll(".coffee__star-favorite");
@@ -331,7 +341,6 @@ export default {
         }
         &__main-content {
             width: 100%;
-            //padding: 0 15px 0 0;
         }
 
         &__products {
@@ -351,15 +360,10 @@ export default {
             border: 1px solid rgba(182, 180, 180, 0.5);
             margin-right: 10px;
             
-
             &:hover {
                 box-shadow: 0 14px 28px rgba(0,0,0,0.3), 0 10px 10px rgba(0,0,0,0.3);
                 transition: 0.5s;
             }
-
-            /*&:nth-child(4n+4) {
-                margin-right: 0;
-            }*/
 
             @include media($screen: 960px){ 	
                 flex: 1 1 47%;
@@ -392,16 +396,12 @@ export default {
             border: 1px solid  #bb8855;
         }
 
-         .activeFavorite{
-            background-color: #415167;
-        }
-
         &__product-price{
             @include text(30px,600, #C7A17A);
             margin-bottom: 10px;
         }
         &__product-title{
-            @include text(24px,700, #232C38);
+            @include text(21px,700, #232C38);
             line-height: normal;
             min-height: 54px;
         }
@@ -441,7 +441,7 @@ export default {
              @include flex(space-between, center,  row,  wrap);
         }
   }
-  .activeFavorite{
+ .favorite{
             background-color: #415167;
         }
    
