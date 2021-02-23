@@ -53,7 +53,7 @@
     <a-modal v-model="visible" title="Favorite drinks" @ok="clearFavorite" :footer="null">
 
          <table class="favorite__list">
-             <a-button :class="isInBtnClearActive() ? 'activeClearBtn' : '' " @click="clearFavorite">clear</a-button>
+             <a-button class="favorite__btn-clear" :class="isInBtnClearActive() ? 'activeClearBtn' : '' " @click="clearFavorite">clear</a-button>
                  <tr class="favorite__item-list" v-for="item in favoriteDrinksWithDescription" :key="item.id">
                     <td><a-avatar class="favorite__item-img" :src="item.picture" /></td>
                     <td class="favorite__item-name">{{item.name}}</td>
@@ -113,7 +113,7 @@ export default {
 
         isInBtnClearActive(){
              let isInActive = false;
-            if (this.favoriteDrinks >1) {
+            if (this.favoriteDrinks.length === 0 ) {
                isInActive = true;
             } else {
                 isInActive = false;
@@ -175,6 +175,10 @@ export default {
     .favorite__item-list {
            height: 50px;
     }
+
+   /* .favorite__btn-clear {
+        display: none;
+    }*/
 
     .activeClearBtn {
         display:none;
