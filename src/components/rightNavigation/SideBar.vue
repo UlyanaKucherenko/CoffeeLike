@@ -113,10 +113,10 @@ export default {
 
         isInBtnClearActive(){
              let isInActive = false;
-            if (this.favoriteDrinks >0) {
-                isInActive = false;
+            if (this.favoriteDrinks >1) {
+               isInActive = true;
             } else {
-                isInActive = true;
+                isInActive = false;
             }
             return isInActive;
         },
@@ -133,6 +133,7 @@ export default {
             this.changeFavoriteState(this.favoriteDrinksWithDescription);
             localStorage.setItem("favoriteDrinks", JSON.stringify(this.favoriteDrinksWithDescription)) ; 
             console.log("clearFavorite");
+            
         }
 
     },

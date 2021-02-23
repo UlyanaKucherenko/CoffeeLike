@@ -145,20 +145,17 @@ export default {
         },
 
         selectFavorite(id) {
-            const AllBtn = document.querySelectorAll(".coffee__star-favorite");
-            console.log("AllBtn",AllBtn);
 
             if (this.favoriteDrinks.includes(id)) {
                 this.favoriteDrinks = this.favoriteDrinks.filter(item => item !== id)
                 console.log('this.favoriteDrinks delete', this.favoriteDrinks);
                 this.changeFavoriteState(this.favoriteDrinks);
-                 AllBtn.style.backgroundColor="";
+               
               
             } else {
                 this.favoriteDrinks.push(id);
                 this.changeFavoriteState(this.favoriteDrinks);
                 console.log('this.favoriteDrinks add', this.favoriteDrinks);
-                  AllBtn.style.backgroundColor="red";
                 
             }
             localStorage.setItem("favoriteDrinks", JSON.stringify(this.favoriteDrinks)) ; 

@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 const config = {
-    apiKey: "AIzaSyD88dFhewledbYYC5iXqEfnFHFJ2BAV8-o",
+    apiKey: process?.env?.VUE_APP_API_KEY || '',
     authDomain: "drinks-coffee.firebaseapp.com",
     projectId: "drinks-coffee",
     storageBucket: "drinks-coffee.appspot.com",

@@ -66,7 +66,7 @@ export default {
                 img:"",
                 name: "",
                 size: "200ml",
-                quantity: "1",
+                quantity: 1,
                 price:"2"
             },
         }
@@ -78,7 +78,7 @@ export default {
             console.log('changed number of drinks', this.quantity);
         },
 
-        getRandomInt(min=60, max=100) {
+        getRandomInt(min=60, max=1000) {
             min = Math.ceil(min);
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
@@ -107,6 +107,7 @@ export default {
         setTimeout(() => { 
            this.visible = false;
             this.form.size = "200ml";
+            this.form.quantity= 1,
             this.confirmLoading = false;
         }, 2000);
     },
