@@ -49,7 +49,7 @@
                                 <template #expandIcon="props">
                                     <a-icon type="right" :rotate="props.isActive ? 90 : 0" />
                                 </template>
-                                <a-collapse-panel key="1" header="Dateil" class="coffee__dateil-header">
+                                <a-collapse-panel key="1" header="Details" class="coffee__dateil-header">
                                     <p class="coffee__product-description"> {{item.description}}</p>
                                     <p>Composition of the: {{item.composition}}</p>
                                     <ul class="coffee__prices-list">
