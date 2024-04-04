@@ -34,7 +34,7 @@
                         <div class="coffee__product-info" >
                             <a-button class="coffee__star-favorite"  :class="isInFavoriteList(item.id) ? 'favorite' : '' " @click="selectFavorite(item.id)" type="primary" shape="circle" icon="star" />
                                 
-                            <p class="coffee__product-price">{{item.prices.small}} $</p>
+                            <p class="coffee__product-price">{{item.prices && item.prices.small}} $</p>
                             <h4 class="coffee__product-title">{{item.name}}</h4>
                             <p class="coffee__product-category">
                                 {{item.category}}
@@ -54,18 +54,20 @@
                                     <p>Composition of the: {{item.composition}}</p>
                                     <ul class="coffee__prices-list">
                                         <li>
-                                            <a-icon type="coffee"  /> {{item.prices.small}}$
+                                            <a-icon type="coffee"  /> {{item.prices && item.prices.small}}$
                                         </li>
                                         <li>
-                                            <a-icon type="coffee" style="font-size:25px"/> {{item.prices.medium}}$
+                                            <a-icon type="coffee" style="font-size:25px"/> {{item.prices && item.prices.medium}}$
                                         </li>
                                         <li>
-                                            <a-icon type="coffee" style="font-size:30px"/> {{item.prices.large}}$
+                                            <a-icon type="coffee" style="font-size:30px"/> {{item.prices && item.prices.large}}$
                                         </li>
                                     </ul>
+                                  
                                 </a-collapse-panel>
                             </a-collapse>      
                         </div>
+                 
                     </div>
                 </div>
             </div> 
